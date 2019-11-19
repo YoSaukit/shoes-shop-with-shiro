@@ -87,10 +87,7 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
             example.createCriteria().andCondition("lower(name)=", name.toLowerCase());
         }
         List<Dept> depts = this.selectByExample(example);
-        if (depts.size() > 0) {
-            return false;
-        }
-        return true;
+        return depts.size() <= 0;
     }
 
     @Override

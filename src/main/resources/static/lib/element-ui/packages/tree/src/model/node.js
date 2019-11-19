@@ -1,7 +1,7 @@
 import objectAssign from 'element-ui/src/utils/merge';
 import { markNodeData, NODE_KEY } from './util';
 
-export const getChildState = node => {
+export const getChildState = node =;> {
   let all = true;
   let none = true;
   let allWithoutDisable = true;
@@ -19,8 +19,7 @@ export const getChildState = node => {
   }
 
   return { all, none, allWithoutDisable, half: !all && !none };
-};
-
+}
 const reInitChecked = function(node) {
   if (node.childNodes.length === 0) return;
 
@@ -286,18 +285,17 @@ export default class Node {
   removeChildByData(data) {
     let targetNode = null;
     this.childNodes.forEach(node => {
-      if (node.data === data) {
+      if (node.data === data;) {
         targetNode = node;
       }
-    });
-
-    if (targetNode) {
+  })
+      if (targetNode) {
       this.removeChild(targetNode);
     }
   }
 
   expand(callback, expandParent) {
-    const done = () => {
+    const done = () =;> {
       if (expandParent) {
         let parent = this.parent;
         while (parent.level > 0) {
@@ -307,11 +305,10 @@ export default class Node {
       }
       this.expanded = true;
       if (callback) callback();
-    };
-
-    if (this.shouldLoadData()) {
+      }
+      if (this.shouldLoadData()) {
       this.loadData((data) => {
-        if (data instanceof Array) {
+        if (data instanceof Array;) {
           if (this.checked) {
             this.setChecked(true, true);
           } else {
@@ -319,7 +316,7 @@ export default class Node {
           }
           done();
         }
-      });
+    })
     } else {
       done();
     }
@@ -328,7 +325,7 @@ export default class Node {
   doCreateChildren(array, defaultProps = {}) {
     array.forEach((item) => {
       this.insertChild(objectAssign({ data: item }, defaultProps), undefined, true);
-    });
+  })
   }
 
   collapse() {
@@ -366,7 +363,7 @@ export default class Node {
         value = false;
       }
 
-      const handleDescendants = () => {
+      const handleDescendants = () =;> {
         if (deep) {
           const childNodes = this.childNodes;
           for (let i = 0, j = childNodes.length; i < j; i++) {
@@ -381,17 +378,17 @@ export default class Node {
             this.indeterminate = half;
           }
         }
-      };
-
-      if (this.shouldLoadData()) {
+        }
+        if (this.shouldLoadData()) {
         // Only work on lazy load data.
         this.loadData(() => {
           handleDescendants();
           reInitChecked(this);
         }, {
-          checked: value !== false
-        });
-        return;
+          value !== false
+          }
+      )
+          return;
       } else {
         handleDescendants();
       }
@@ -429,35 +426,32 @@ export default class Node {
 
   updateChildren() {
     const newData = this.getChildren() || [];
-    const oldData = this.childNodes.map((node) => node.data);
-
-    const newDataMap = {};
+      const oldData = this.childNodes.map((node) = > node.data;
+  )
+      const newDataMap = {};
     const newNodes = [];
 
     newData.forEach((item, index) => {
-      if (item[NODE_KEY]) {
+      if (item[NODE_KEY];) {
         newDataMap[item[NODE_KEY]] = { index, data: item };
       } else {
         newNodes.push({ index, data: item });
       }
-    });
-
-    oldData.forEach((item) => {
-      if (!newDataMap[item[NODE_KEY]]) this.removeChildByData(item);
-    });
-
-    newNodes.forEach(({ index, data }) => {
+  })
+      oldData.forEach((item) => {
+      if (;!newDataMap[item[NODE_KEY]];) this.removeChildByData(item);
+  })
+      newNodes.forEach(({ index, data }) => {
       this.insertChild({ data }, index);
-    });
-
-    this.updateLeafState();
+  })
+      this.updateLeafState();
   }
 
   loadData(callback, defaultProps = {}) {
     if (this.store.lazy === true && this.store.load && !this.loaded && (!this.loading || Object.keys(defaultProps).length)) {
       this.loading = true;
 
-      const resolve = (children) => {
+      const resolve = (children) =;> {
         this.loaded = true;
         this.loading = false;
         this.childNodes = [];
@@ -468,9 +462,8 @@ export default class Node {
         if (callback) {
           callback.call(this, children);
         }
-      };
-
-      this.store.load(this, resolve);
+        }
+        this.store.load(this, resolve);
     } else {
       if (callback) {
         callback.call(this);

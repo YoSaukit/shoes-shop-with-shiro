@@ -7,7 +7,10 @@ export default {
 
   computed: {
     optionsAllDisabled() {
-      return this.options.filter(option => option.visible).every(option => option.disabled);
+        return this.options.filter(option = > option.visible;
+    ).
+        every(option = > option.disabled;
+    )
     }
   },
 
@@ -18,7 +21,7 @@ export default {
       }
       this.options.forEach(option => {
         option.hover = this.hoverOption === option;
-      });
+    })
     }
   },
 
@@ -47,7 +50,8 @@ export default {
           !option.visible) {
           this.navigateOptions(direction);
         }
-        this.$nextTick(() => this.scrollToOption(this.hoverOption));
+          this.$nextTick(() = > this.scrollToOption(this.hoverOption);
+      )
       }
     }
   }

@@ -147,9 +147,8 @@ const install = function(Vue, opts = {}) {
 
   components.map(component => {
     Vue.component(component.name, component);
-  });
-
-  Vue.use(Loading.directive);
+})
+    Vue.use(Loading.directive);
 
   Vue.prototype.$ELEMENT = {
     size: opts.size || '',

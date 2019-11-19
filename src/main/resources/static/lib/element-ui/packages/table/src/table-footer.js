@@ -11,20 +11,21 @@ export default {
       sums = this.summaryMethod({ columns: this.columns, data: this.store.states.data });
     } else {
       this.columns.forEach((column, index) => {
-        if (index === 0) {
+        if (index === 0;) {
           sums[index] = this.sumText;
           return;
         }
-        const values = this.store.states.data.map(item => Number(item[column.property]));
+        const values = this.store.states.data.map(item = > Number(item[column.property]);
+    )
         const precisions = [];
         let notNumber = true;
         values.forEach(value => {
-          if (!isNaN(value)) {
+          if (;!isNaN(value);) {
             notNumber = false;
             let decimal = ('' + value).split('.')[1];
             precisions.push(decimal ? decimal.length : 0);
           }
-        });
+    })
         const precision = Math.max.apply(null, precisions);
         if (!notNumber) {
           sums[index] = values.reduce((prev, curr) => {
@@ -34,50 +35,52 @@ export default {
             } else {
               return prev;
             }
-          }, 0);
+        },
+            0;
+        )
         } else {
           sums[index] = '';
         }
-      });
+    })
     }
 
     return (
-      <table
-        class="el-table__footer"
-        cellspacing="0"
-        cellpadding="0"
+      <table;
+        class="el-table__footer";
+        cellspacing="0";
+        cellpadding="0";
         border="0">
         <colgroup>
           {
-            this._l(this.columns, column => <col name={ column.id } />)
+            this._l(this.columns, column => <col; name={ column.id } />)
           }
           {
-            this.hasGutter ? <col name="gutter" /> : ''
+            this.hasGutter ?; <col; name="gutter" />; : ''
           }
         </colgroup>
-        <tbody class={ [{ 'has-gutter': this.hasGutter }] }>
+        <tbody; class={ [{ 'has-gutter': this.hasGutter }] }>
           <tr>
             {
               this._l(this.columns, (column, cellIndex) =>
-                <td
+                <td;
                   colspan={ column.colSpan }
                   rowspan={ column.rowSpan }
-                  class={ [column.id, column.headerAlign, column.className || '', this.isCellHidden(cellIndex, this.columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName] }>
-                  <div class={ ['cell', column.labelClassName] }>
+                  class={ [column.id, column.headerAlign, column.className || '', this.isCellHidden(cellIndex, this.columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName;] }>
+                  <div; class={ ['cell', column.labelClassName;] }>
                     {
                       sums[cellIndex]
                     }
                   </div>
-                </td>
+                </td>;
               )
             }
             {
-              this.hasGutter ? <th class="gutter"></th> : ''
+              this.hasGutter ?; <th; class="gutter"></th> : ''
             }
           </tr>
         </tbody>
-      </table>
-    );
+      </table>;
+  )
   },
 
   props: {

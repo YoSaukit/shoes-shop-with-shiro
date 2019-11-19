@@ -142,10 +142,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
             example.createCriteria().andCondition("lower(name)=", name.toLowerCase());
         }
         List<Menu> menus = this.selectByExample(example);
-        if (menus.size() > 0) {
-            return false;
-        }
-        return true;
+        return menus.size() <= 0;
     }
 
     @Override

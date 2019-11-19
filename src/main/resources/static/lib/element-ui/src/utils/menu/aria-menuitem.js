@@ -43,7 +43,7 @@ MenuItem.prototype.addListeners = function() {
     if (prevDef) {
       event.preventDefault();
     }
-  });
+})
 };
 
 export default MenuItem;

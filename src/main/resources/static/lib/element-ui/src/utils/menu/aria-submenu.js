@@ -52,8 +52,8 @@ SubMenu.prototype.addListeners = function() {
         event.stopPropagation();
       }
       return false;
-    });
-  });
+})
+})
 };
 
 export default SubMenu;

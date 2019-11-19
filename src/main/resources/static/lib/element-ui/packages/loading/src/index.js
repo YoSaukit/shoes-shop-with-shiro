@@ -34,11 +34,13 @@ LoadingConstructor.prototype.close = function() {
       this.$el.parentNode.removeChild(this.$el);
     }
     this.$destroy();
-  }, 300);
-  this.visible = false;
+},
+    300;
+)
+    this.visible = false;
 };
 
-const addStyle = (options, parent, instance) => {
+const addStyle = (options, parent, instance) =;> {
   let maskStyle = {};
   if (options.fullscreen) {
     instance.originalPosition = getStyle(document.body, 'position');
@@ -52,19 +54,18 @@ const addStyle = (options, parent, instance) => {
         document.body[scroll] +
         document.documentElement[scroll] +
         'px';
-    });
-    ['height', 'width'].forEach(property => {
+  })
+      ['height', 'width'].forEach(property => {
       maskStyle[property] = options.target.getBoundingClientRect()[property] + 'px';
-    });
+  })
   } else {
     instance.originalPosition = getStyle(parent, 'position');
   }
   Object.keys(maskStyle).forEach(property => {
     instance.$el.style[property] = maskStyle[property];
-  });
-};
-
-const Loading = (options = {}) => {
+})
+}
+const Loading = (options = {}) =;> {
   if (Vue.prototype.$isServer) return;
   options = merge({}, defaults, options);
   if (typeof options.target === 'string') {
@@ -96,11 +97,10 @@ const Loading = (options = {}) => {
   parent.appendChild(instance.$el);
   Vue.nextTick(() => {
     instance.visible = true;
-  });
-  if (options.fullscreen) {
+})
+    if (options.fullscreen) {
     fullscreenLoading = instance;
   }
   return instance;
-};
-
+}
 export default Loading;

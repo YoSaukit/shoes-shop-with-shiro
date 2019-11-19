@@ -34,10 +34,10 @@ let app = new Vue({
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
                 let $this = response.body;
-                if ($this.code == 200) {
-                    this.tree = $this.data;
-                }
-            })
+            if ($this.code == 200) {
+                this.tree = $this.data;
+            }
+        })
         },
         //修改密码
         updatePass(form) {
@@ -45,7 +45,7 @@ let app = new Vue({
                 if (valid) {
                     this.$http.get(api.common.updatePassword(this.newpass.password)).then(response => {
                         window.location.href = '/logout';
-                    })
+                })
                 }
             })
         },

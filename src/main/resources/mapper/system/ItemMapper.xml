@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tycoding.item.mapper.ItemMapper">
+  <resultMap id="BaseResultMap" type="cn.tycoding.system.entity.Item">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+
+  <!--<select id="getItemByFields" resultType="cn.tycoding.system.entity.Item">-->
+    <!--select *-->
+    <!--from tb_item-->
+    <!--<where>-->
+      <!--<if test="type != null and type != ''">-->
+        <!--`type` = #{type}-->
+      <!--</if>-->
+      <!--and-->
+      <!--<if test="title != null and title != ''">-->
+        <!--title like concat('%',#{title},'%')-->
+      <!--</if>-->
+      <!--and-->
+      <!--<if test="startTime != null and endTime != null">-->
+        <!--`time` between #{startTime,jdbcType=TIMESTAMP} and #{endTime,jdbcType=TIMESTAMP}-->
+      <!--</if>-->
+      <!--order by `time` desc-->
+
+    <!--</where>-->
+  <!--</select>-->
+</mapper>

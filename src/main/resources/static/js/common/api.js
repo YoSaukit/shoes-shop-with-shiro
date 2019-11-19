@@ -154,6 +154,13 @@ let api = {
         movie: {
             hot: '/web/movie/hot',
         },
+    },
+    item: {
+        shop: {
+            list(pageCode, pageSize) {
+                return '/item/shop/list?pageCode=' + pageCode + '&pageSize=' + pageSize;
+            },
+        }
     }
 
-}
+};

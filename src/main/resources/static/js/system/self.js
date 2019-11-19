@@ -1,7 +1,7 @@
 let app = new Vue({
     el: '#app',
     data() {
-        var validateName = (rule, value, callback) => {
+        var validateName = (rule, value, callback) =;> {
             if (!value) {
                 return callback(new Error('名称不能为空'))
             }
@@ -56,10 +56,10 @@ let app = new Vue({
     created() {
         window.onload = function () {
             app.changeDiv();
-        }
+        };
         window.onresize = function () {
             app.changeDiv();
-        }
+        };
         this.init(); //初始化
     },
     mounted() {
@@ -78,7 +78,7 @@ let app = new Vue({
         init() {
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
-                if (response.body.code == 200) {
+                if (response.body.code == 200;) {
                     this.tree = response.body.data;
                 }
             })
@@ -91,7 +91,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            })
+            };)
         },
 
         //触发关闭按钮
@@ -104,7 +104,7 @@ let app = new Vue({
         handleEditAvatar() {
             this.$http.get(api.system.user.avatar).then(response => {
                 this.avatarList = response.body;
-            });
+        })
             this.avatarDialog = true;
         },
         //修改头像
@@ -144,16 +144,16 @@ let app = new Vue({
             if (this.$refs.form != undefined) {
                 this.$refs.form.resetFields(); //重置表单校验状态
             }
-            this.form.username = ''
-            this.form.password = ''
-            this.form.deptId = []
-            this.form.createTime = ''
-            this.form.avatar = ''
-            this.form.phone = ''
-            this.form.sex = ''
-            this.form.description = ''
-            this.form.status = null
-            this.form.roleIds = []
+            this.form.username = '';
+            this.form.password = '';
+            this.form.deptId = [];
+            this.form.createTime = '';
+            this.form.avatar = '';
+            this.form.phone = '';
+            this.form.sex = '';
+            this.form.description = '';
+            this.form.status = null;
+            this.form.roleIds = [];
             this.form.id = null;
             this.form.roleId = null;
         },
@@ -165,7 +165,7 @@ let app = new Vue({
                     this.formDialog = false;
                     //修改
                     this.$http.post(api.system.user.update, JSON.stringify(this.form)).then(response => {
-                        if (response.body.code == 200) {
+                        if (response.body.code == 200;) {
                             this._notify(response.body.msg, 'success')
                         } else {
                             this._notify(response.body.msg, 'error')

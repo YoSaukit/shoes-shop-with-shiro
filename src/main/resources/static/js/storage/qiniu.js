@@ -27,10 +27,10 @@ let app = new Vue({
     created() {
         window.onload = function () {
             app.changeDiv();
-        }
+        };
         window.onresize = function () {
             app.changeDiv();
-        }
+        };
 
         this.init(); //初始化
         this.search();
@@ -51,7 +51,7 @@ let app = new Vue({
         init() {
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
-                if (response.body.code == 200) {
+                if (response.body.code == 200;) {
                     this.tree = response.body.data;
                 }
             })
@@ -64,7 +64,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            })
+            };)
         },
 
         //获取用户列表
@@ -101,16 +101,16 @@ let app = new Vue({
                 center: true
             }).then(() => {
                 this.$http.get(api.storage.qiniu.deleteOne(name)).then(response => {
-                    if (response.code != 200) {
+                    if (response.code != 200;) {
                         this._notify(response.body.msg, 'success')
                     } else {
                         this._notify(response.body.msg, 'error')
                     }
                     this.search();
-                });
-            }).catch(() => {
+        })
+        }).catch(() => {
                 this._notify('已取消删除', 'info');
-            });
+        })
         },
 
         //触发新增按钮
@@ -121,10 +121,10 @@ let app = new Vue({
         //上传
         upload(item) {
             console.log(item);
-            const formData = new FormData()
-            formData.append('file', item.file)
+            const formData = new FormData();
+            formData.append('file', item.file);
             this.$http.post(api.storage.qiniu.upload, formData).then(response => {
-                this.createDialogVisible = false
+                this.createDialogVisible = false;
                 if (response.body.code == 200) {
                     this._notify(response.body.msg, 'success')
                 } else {
@@ -146,7 +146,7 @@ let app = new Vue({
                 if (valid) {
                     console.log(this.dataForm);
                     this.$http.get(api.storage.qiniu.updateOne(this.dataForm.oldname, this.dataForm.newname)).then(response => {
-                        this.updateDialogVisible = false
+                        this.updateDialogVisible = false;
                         if (response.body.code == 200) {
                             this._notify(response.body.msg, 'success')
                         } else {
@@ -155,7 +155,7 @@ let app = new Vue({
                         this.search();
                     })
                 }
-            })
+            };)
         },
         //文件上传前的前的钩子函数
         beforeUpload(file) {

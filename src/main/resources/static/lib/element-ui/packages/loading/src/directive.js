@@ -6,12 +6,12 @@ import afterLeave from 'element-ui/src/utils/after-leave';
 const Mask = Vue.extend(Loading);
 
 const loadingDirective = {};
-loadingDirective.install = Vue => {
+loadingDirective.install = Vue =;> {
   if (Vue.prototype.$isServer) return;
-  const toggleLoading = (el, binding) => {
+  const toggleLoading = (el, binding) =;> {
     if (binding.value) {
       Vue.nextTick(() => {
-        if (binding.modifiers.fullscreen) {
+        if (binding.modifiers.fullscreen;) {
           el.originalPosition = getStyle(document.body, 'position');
           el.originalOverflow = getStyle(document.body, 'overflow');
           el.maskStyle.zIndex = PopupManager.nextZIndex();
@@ -31,18 +31,17 @@ loadingDirective.install = Vue => {
                 document.documentElement[scroll] -
                 parseInt(getStyle(document.body, `margin-${ property }`), 10) +
                 'px';
-            });
-            ['height', 'width'].forEach(property => {
+          })
+              ['height', 'width'].forEach(property => {
               el.maskStyle[property] = el.getBoundingClientRect()[property] + 'px';
-            });
-
-            insertDom(document.body, el, binding);
+          })
+              insertDom(document.body, el, binding);
           } else {
             el.originalPosition = getStyle(el, 'position');
             insertDom(el, el, binding);
           }
         }
-      });
+    })
     } else {
       afterLeave(el.instance, _ => {
         el.domVisible = false;
@@ -52,18 +51,19 @@ loadingDirective.install = Vue => {
         removeClass(target, 'el-loading-parent--relative');
         removeClass(target, 'el-loading-parent--hidden');
         el.instance.hiding = false;
-      }, 300, true);
-      el.instance.visible = false;
+    },
+        300, true;
+    )
+        el.instance.visible = false;
       el.instance.hiding = true;
     }
-  };
-  const insertDom = (parent, el, binding) => {
+    }
+    const insertDom = (parent, el, binding) =;> {
     if (!el.domVisible && getStyle(el, 'display') !== 'none' && getStyle(el, 'visibility') !== 'hidden') {
       Object.keys(el.maskStyle).forEach(property => {
         el.mask.style[property] = el.maskStyle[property];
-      });
-
-      if (el.originalPosition !== 'absolute' && el.originalPosition !== 'fixed') {
+    })
+        if (el.originalPosition !== 'absolute' && el.originalPosition !== 'fixed') {
         addClass(parent, 'el-loading-parent--relative');
       }
       if (binding.modifiers.fullscreen && binding.modifiers.lock) {
@@ -73,17 +73,16 @@ loadingDirective.install = Vue => {
 
       parent.appendChild(el.mask);
       Vue.nextTick(() => {
-        if (el.instance.hiding) {
+        if (el.instance.hiding;) {
           el.instance.$emit('after-leave');
         } else {
           el.instance.visible = true;
         }
-      });
-      el.domInserted = true;
+    })
+        el.domInserted = true;
     }
-  };
-
-  Vue.directive('loading', {
+    }
+    Vue.directive('loading', {
     bind: function(el, binding, vnode) {
       const textExr = el.getAttribute('element-loading-text');
       const spinnerExr = el.getAttribute('element-loading-spinner');
@@ -123,6 +122,5 @@ loadingDirective.install = Vue => {
       }
     }
   });
-};
-
+}
 export default loadingDirective;

@@ -201,19 +201,20 @@ export default class Color {
       return;
     }
 
-    const fromHSV = (h, s, v) => {
+    const fromHSV = (h, s, v) =;> {
       this._hue = Math.max(0, Math.min(360, h));
       this._saturation = Math.max(0, Math.min(100, s));
       this._value = Math.max(0, Math.min(100, v));
 
       this.doOnChange();
-    };
-
-    if (value.indexOf('hsl') !== -1) {
+      }
+      if (value.indexOf('hsl') !== -1) {
       const parts = value.replace(/hsla|hsl|\(|\)/gm, '')
-        .split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
-
-      if (parts.length === 4) {
+          .split(/\s|,/g).filter((val) = > val !== '';
+    ).
+        map((val, index) = > index > 2 ? parseFloat(val) : parseInt(val, 10);
+    )
+        if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
       } else if (parts.length === 3) {
         this._alpha = 100;
@@ -224,9 +225,11 @@ export default class Color {
       }
     } else if (value.indexOf('hsv') !== -1) {
       const parts = value.replace(/hsva|hsv|\(|\)/gm, '')
-        .split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
-
-      if (parts.length === 4) {
+          .split(/\s|,/g).filter((val) = > val !== '';
+    ).
+        map((val, index) = > index > 2 ? parseFloat(val) : parseInt(val, 10);
+    )
+        if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
       } else if (parts.length === 3) {
         this._alpha = 100;
@@ -236,9 +239,11 @@ export default class Color {
       }
     } else if (value.indexOf('rgb') !== -1) {
       const parts = value.replace(/rgba|rgb|\(|\)/gm, '')
-        .split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
-
-      if (parts.length === 4) {
+          .split(/\s|,/g).filter((val) = > val !== '';
+    ).
+        map((val, index) = > index > 2 ? parseFloat(val) : parseInt(val, 10);
+    )
+        if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
       } else if (parts.length === 3) {
         this._alpha = 100;

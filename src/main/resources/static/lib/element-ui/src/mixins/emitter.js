@@ -7,7 +7,7 @@ function broadcast(componentName, eventName, params) {
     } else {
       broadcast.apply(child, [componentName, eventName].concat([params]));
     }
-  });
+})
 }
 export default {
   methods: {

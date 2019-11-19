@@ -40,8 +40,8 @@ export default {
       const columnsMap = {};
       flattenColumns.forEach((column) => {
         columnsMap[column.id] = column;
-      });
-      for (let i = 0, j = cols.length; i < j; i++) {
+    })
+        for (let i = 0, j = cols.length; i < j; i++) {
         const col = cols[i];
         const name = col.getAttribute('name');
         const column = columnsMap[name];

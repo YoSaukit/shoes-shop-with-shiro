@@ -1,7 +1,7 @@
 let app = new Vue({
     el: '#app',
     data() {
-        var validateName = (rule, value, callback) => {
+        var validateName = (rule, value, callback) =;> {
             if (!value) {
                 return callback(new Error('名称不能为空'))
             }
@@ -68,10 +68,10 @@ let app = new Vue({
     created() {
         window.onload = function () {
             app.changeDiv();
-        }
+        };
         window.onresize = function () {
             app.changeDiv();
-        }
+        };
 
         this.init(); //初始化
         this.search(this.pageConf.pageCode, this.pageConf.pageSize);
@@ -92,7 +92,7 @@ let app = new Vue({
         init() {
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
-                if (response.body.code == 200) {
+                if (response.body.code == 200;) {
                     this.tree = response.body.data;
                 }
             })
@@ -105,7 +105,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            })
+            };)
         },
 
         //获取用户列表
@@ -137,7 +137,7 @@ let app = new Vue({
         handleEditAvatar() {
             this.$http.get(api.system.user.avatar).then(response => {
                 this.avatarList = response.body;
-            });
+        })
             this.avatarDialog = true;
         },
         //修改头像
@@ -160,7 +160,7 @@ let app = new Vue({
             if (id == null) {
                 this.dialogTitle = '新增用户'
             } else {
-                this.dialogTitle = '修改用户'
+                this.dialogTitle = '修改用户';
                 this.$http.get(api.system.user.getUser(id)).then(response => {
                     this.form = response.body.data;
                     if (response.body.data.deptId == null) {
@@ -176,16 +176,16 @@ let app = new Vue({
             if (this.$refs.form != undefined) {
                 this.$refs.form.resetFields(); //重置表单校验状态
             }
-            this.form.username = ''
-            this.form.password = ''
-            this.form.deptId = []
-            this.form.createTime = ''
-            this.form.avatar = ''
-            this.form.phone = ''
-            this.form.sex = ''
-            this.form.description = ''
-            this.form.status = null
-            this.form.roleIds = []
+            this.form.username = '';
+            this.form.password = '';
+            this.form.deptId = [];
+            this.form.createTime = '';
+            this.form.avatar = '';
+            this.form.phone = '';
+            this.form.sex = '';
+            this.form.description = '';
+            this.form.status = null;
+            this.form.roleIds = [];
             this.form.id = null;
             this.form.roleId = null;
         },
@@ -197,7 +197,7 @@ let app = new Vue({
                     this.dialogVisible = false;
                     if (this.form.id == null || this.form.id == 0) {
                         this.$http.post(api.system.user.add, JSON.stringify(this.form)).then(response => {
-                            if (response.body.code == 200) {
+                            if (response.body.code == 200;) {
                                 this._notify(response.body.msg, 'success')
                             } else {
                                 this._notify(response.body.msg, 'error')
@@ -208,7 +208,7 @@ let app = new Vue({
                     } else {
                         //修改
                         this.$http.post(api.system.user.update, JSON.stringify(this.form)).then(response => {
-                            if (response.body.code == 200) {
+                            if (response.body.code == 200;) {
                                 if (this.form.id == this.info.id) {
                                     window.location.href = "/logout"
                                 }
@@ -241,7 +241,7 @@ let app = new Vue({
 
         //Table选中触发事件
         selectChange(val) {
-            this.selectIds = []
+            this.selectIds = [];
             val.forEach(row => {
                 this.selectIds.push(row.id)
             })
@@ -258,7 +258,7 @@ let app = new Vue({
                 type: 'warning'
             }).then(() => {
                 this.$http.post(api.system.user.delete, JSON.stringify(this.selectIds)).then(response => {
-                    if (response.body.code == 200) {
+                    if (response.body.code == 200;) {
                         this._notify('删除成功', 'success')
                     } else {
                         this._notify(response.body.msg, 'error')
@@ -269,7 +269,7 @@ let app = new Vue({
                 })
             }).catch(() => {
                 this._notify('已取消删除', 'info')
-            });
+        })
         },
 
         //触发导出按钮

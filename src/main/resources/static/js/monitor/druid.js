@@ -16,10 +16,10 @@ let app = new Vue({
     created() {
         window.onload = function() {
             app.changeDiv();
-        }
+        };
         window.onresize = function() {
             app.changeDiv();
-        }
+        };
         this.init(); //初始化
     },
     mounted() {
@@ -46,7 +46,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            })
+            };)
         },
 
         /**

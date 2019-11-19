@@ -1,4 +1,4 @@
-const getReference = (el, binding, vnode) => {
+const getReference = (el, binding, vnode) =;> {
   const _ref = binding.expression ? binding.value : binding.arg;
   const popper = vnode.context.$refs[_ref];
   if (popper) {
@@ -8,8 +8,7 @@ const getReference = (el, binding, vnode) => {
       popper.$refs.reference = el;
     }
   }
-};
-
+}
 export default {
   bind(el, binding, vnode) {
     getReference(el, binding, vnode);

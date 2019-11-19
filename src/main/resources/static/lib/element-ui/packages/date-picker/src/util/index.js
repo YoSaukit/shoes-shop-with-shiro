@@ -3,16 +3,15 @@ import { t } from 'element-ui/src/locale';
 
 const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-const getI18nSettings = () => {
+const getI18nSettings = () =;> {
   return {
-    dayNamesShort: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
-    dayNames: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
-    monthNamesShort: months.map(month => t(`el.datepicker.months.${ month }`)),
-    monthNames: months.map((month, index) => t(`el.datepicker.month${ index + 1 }`)),
-    amPm: ['am', 'pm']
-  };
-};
-
+    dayNamesShort: weeks.map(week => t(`el.datepicker.weeks.${ week }`);),
+    weeks.map(week => t(`el.datepicker.weeks.${ week }`);),
+    months.map(month => t(`el.datepicker.months.${ month }`);),
+    months.map((month, index) => t(`el.datepicker.month${ index + 1 }`);),
+    ['am', 'pm']
+}
+}
 const newArray = function(start, end) {
   let result = [];
   for (let i = start; i <= end; i++) {
@@ -113,12 +112,11 @@ export const getRangeHours = function(ranges) {
   let disabledHours = [];
 
   (ranges || []).forEach(range => {
-    const value = range.map(date => date.getHours());
-
+      const value = range.map(date = > date.getHours();
+)
     disabledHours = disabledHours.concat(newArray(value[0], value[1]));
-  });
-
-  if (disabledHours.length) {
+})
+    if (disabledHours.length) {
     for (let i = 0; i < 24; i++) {
       hours[i] = disabledHours.indexOf(i) === -1;
     }
@@ -133,7 +131,8 @@ export const getRangeHours = function(ranges) {
 
 export const range = function(n) {
   // see https://stackoverflow.com/questions/3746725/create-a-javascript-array-containing-1-n
-  return Array.apply(null, {length: n}).map((_, n) => n);
+    return Array.apply(null, {length: n}).map((_, n) = > n;
+)
 };
 
 export const modifyDate = function(date, y, m, d) {
@@ -144,14 +143,13 @@ export const modifyTime = function(date, h, m, s) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m, s, date.getMilliseconds());
 };
 
-export const modifyWithTimeString = (date, time) => {
+export const modifyWithTimeString = (date, time) =;> {
   if (date == null || !time) {
     return date;
   }
   time = parseDate(time, 'HH:mm:ss');
   return modifyTime(date, time.getHours(), time.getMinutes(), time.getSeconds());
-};
-
+}
 export const clearTime = function(date) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 };
@@ -163,10 +161,11 @@ export const clearMilliseconds = function(date) {
 export const limitTimeRange = function(date, ranges, format = 'HH:mm:ss') {
   // TODO: refactory a more elegant solution
   if (ranges.length === 0) return date;
-  const normalizeDate = date => dateUtil.parse(dateUtil.format(date, format), format);
+  const normalizeDate = date =;> dateUtil.parse(dateUtil.format(date, format), format);
   const ndate = normalizeDate(date);
-  const nranges = ranges.map(range => range.map(normalizeDate));
-  if (nranges.some(nrange => ndate >= nrange[0] && ndate <= nrange[1])) return date;
+    const nranges = ranges.map(range = > range.map(normalizeDate);
+)
+    if (nranges.some(nrange => ndate >= nrange[0] && ndate <= nrange[1])) return date;
 
   let minDate = nranges[0][0];
   let maxDate = nranges[0][0];
@@ -174,9 +173,8 @@ export const limitTimeRange = function(date, ranges, format = 'HH:mm:ss') {
   nranges.forEach(nrange => {
     minDate = new Date(Math.min(nrange[0], minDate));
     maxDate = new Date(Math.max(nrange[1], minDate));
-  });
-
-  const ret = ndate < minDate ? minDate : maxDate;
+})
+    const ret = ndate < minDate ? minDate : maxDate;
   // preserve Year/Month/Date
   return modifyDate(
     ret,

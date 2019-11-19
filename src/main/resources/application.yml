@@ -14,7 +14,7 @@ spring:
       #mysql驱动
       driver-class-name: com.mysql.cj.jdbc.Driver
       #基本属性
-      url: jdbc:mysql://127.0.0.1:3306/permission?useUnicode=true&characterEncoding=UTF-8
+      url: jdbc:mysql://127.0.0.1:3306/shoes?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
       username: root
       password: root
       #配置初始化大小/最小/最大
@@ -69,7 +69,6 @@ mybatis:
     use-column-label: true
     # 开启驼峰命名转换，如：Table(create_time) -> Entity(createTime)。不需要我们关心怎么进行字段匹配，mybatis会自动识别`大写字母与下划线`
     map-underscore-to-camel-case: true
-
 #mybaatis分页插件pagehelper设置
 pagehelper:
   helperDialect: mysql
@@ -89,3 +88,7 @@ qiniu:
   secret_key: SECRET_KEY
   bucket_name: BUCKETNAME
   url: http://xxx/
+mapper:
+  mappers: cn.tycoding.common.config.MyMapper
+  not-empty: false
+  identity: MYSQL

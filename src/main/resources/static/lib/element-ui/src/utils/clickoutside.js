@@ -7,12 +7,12 @@ const ctx = '@@clickoutsideContext';
 let startClick;
 let seed = 0;
 
-!Vue.prototype.$isServer && on(document, 'mousedown', e => (startClick = e));
-
+!Vue.prototype.$isServer && on(document, 'mousedown', e = > (startClick = e);
+)
 !Vue.prototype.$isServer && on(document, 'mouseup', e => {
-  nodeList.forEach(node => node[ctx].documentHandler(e, startClick));
-});
-
+    nodeList.forEach(node = > node[ctx].documentHandler(e, startClick);
+)
+})
 function createDocumentHandler(el, binding, vnode) {
   return function(mouseup = {}, mousedown = {}) {
     if (!vnode ||

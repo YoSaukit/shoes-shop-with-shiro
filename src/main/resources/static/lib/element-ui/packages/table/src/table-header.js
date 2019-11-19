@@ -5,22 +5,21 @@ import Vue from 'vue';
 import FilterPanel from './filter-panel.vue';
 import LayoutObserver from './layout-observer';
 
-const getAllColumns = (columns) => {
+const getAllColumns = (columns) =;> {
   const result = [];
   columns.forEach((column) => {
-    if (column.children) {
+    if (column.children;) {
       result.push(column);
       result.push.apply(result, getAllColumns(column.children));
     } else {
       result.push(column);
     }
-  });
-  return result;
-};
-
-const convertToRows = (originColumns) => {
+})
+    return result;
+}
+const convertToRows = (originColumns) =;> {
   let maxLevel = 1;
-  const traverse = (column, parent) => {
+  const traverse = (column, parent) =;> {
     if (parent) {
       column.level = parent.level + 1;
       if (maxLevel < column.level) {
@@ -32,19 +31,17 @@ const convertToRows = (originColumns) => {
       column.children.forEach((subColumn) => {
         traverse(subColumn, column);
         colSpan += subColumn.colSpan;
-      });
-      column.colSpan = colSpan;
+    })
+        column.colSpan = colSpan;
     } else {
       column.colSpan = 1;
     }
-  };
-
-  originColumns.forEach((column) => {
+    }
+    originColumns.forEach((column) => {
     column.level = 1;
     traverse(column);
-  });
-
-  const rows = [];
+})
+    const rows = [];
   for (let i = 0; i < maxLevel; i++) {
     rows.push([]);
   }
@@ -52,17 +49,15 @@ const convertToRows = (originColumns) => {
   const allColumns = getAllColumns(originColumns);
 
   allColumns.forEach((column) => {
-    if (!column.children) {
+    if (;!column.children;) {
       column.rowSpan = maxLevel - column.level + 1;
     } else {
       column.rowSpan = 1;
     }
     rows[column.level - 1].push(column);
-  });
-
-  return rows;
-};
-
+})
+    return rows;
+}
 export default {
   name: 'ElTableHeader',
 
@@ -75,39 +70,39 @@ export default {
     const isGroup = columnRows.length > 1;
     if (isGroup) this.$parent.isGroup = true;
     return (
-      <table
-        class="el-table__header"
-        cellspacing="0"
-        cellpadding="0"
+      <table;
+        class="el-table__header";
+        cellspacing="0";
+        cellpadding="0";
         border="0">
         <colgroup>
           {
-            this._l(this.columns, column => <col name={ column.id } />)
+            this._l(this.columns, column => <col; name={ column.id } />)
           }
           {
-            this.hasGutter ? <col name="gutter" /> : ''
+            this.hasGutter ?; <col; name="gutter" />; : ''
           }
         </colgroup>
-        <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
+        <thead; class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
           {
             this._l(columnRows, (columns, rowIndex) =>
-              <tr
+              <tr;
                 style={ this.getHeaderRowStyle(rowIndex) }
                 class={ this.getHeaderRowClass(rowIndex) }
               >
                 {
                   this._l(columns, (column, cellIndex) =>
-                    <th
+                    <th;
                       colspan={ column.colSpan }
                       rowspan={ column.rowSpan }
-                      on-mousemove={ ($event) => this.handleMouseMove($event, column) }
+                      on-mousemove={ ($event) =;> this.handleMouseMove($event, column) }
                       on-mouseout={ this.handleMouseOut }
-                      on-mousedown={ ($event) => this.handleMouseDown($event, column) }
-                      on-click={ ($event) => this.handleHeaderClick($event, column) }
-                      on-contextmenu={ ($event) => this.handleHeaderContextMenu($event, column) }
+                      on-mousedown={ ($event) =;> this.handleMouseDown($event, column) }
+                      on-click={ ($event) =;> this.handleHeaderClick($event, column) }
+                      on-contextmenu={ ($event) =;> this.handleHeaderContextMenu($event, column) }
                       style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
                       class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }>
-                      <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
+                      <div; class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName;] }>
                         {
                           column.renderHeader
                             ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
@@ -115,32 +110,32 @@ export default {
                         }
                         {
                           column.sortable
-                            ? <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
-                              <i class="sort-caret ascending" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }>
+                            ?; <span; class="caret-wrapper"; on-click={ ($event) =;> this.handleSortClick($event, column) }>
+                              <i; class="sort-caret ascending"; on-click={ ($event) =;> this.handleSortClick($event, column, 'ascending') }>
                               </i>
-                              <i class="sort-caret descending" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }>
+                              <i; class="sort-caret descending"; on-click={ ($event) =;> this.handleSortClick($event, column, 'descending') }>
                               </i>
-                            </span>
+                            </span>;
                             : ''
                         }
                         {
                           column.filterable
-                            ? <span class="el-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i></span>
+                            ?; <span; class="el-table__column-filter-trigger"; on-click={ ($event) =;> this.handleFilterClick($event, column) }><i; class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : '';] }></i></s;pan>;
                             : ''
                         }
                       </div>
-                    </th>
+                    </th>;
                   )
                 }
                 {
-                  this.hasGutter ? <th class="gutter"></th> : ''
+                  this.hasGutter ?; <th; class="gutter"></th> : ''
                 }
-              </tr>
+              </tr>;
             )
           }
         </thead>
-      </table>
-    );
+      </table>;
+  )
   },
 
   props: {
@@ -333,7 +328,9 @@ export default {
 
       setTimeout(() => {
         filterPanel.showPopper = true;
-      }, 16);
+    },
+        16;
+    )
     },
 
     handleHeaderClick(event, column) {
@@ -381,14 +378,13 @@ export default {
         document.onselectstart = function() { return false; };
         document.ondragstart = function() { return false; };
 
-        const handleMouseMove = (event) => {
+        const handleMouseMove = (event) =;> {
           const deltaLeft = event.clientX - this.dragState.startMouseLeft;
           const proxyLeft = this.dragState.startLeft + deltaLeft;
 
           resizeProxy.style.left = Math.max(minLeft, proxyLeft) + 'px';
-        };
-
-        const handleMouseUp = () => {
+          }
+          const handleMouseUp = () =;> {
           if (this.dragging) {
             const {
               startColumnLeft,
@@ -417,9 +413,8 @@ export default {
           setTimeout(function() {
             removeClass(columnEl, 'noclick');
           }, 0);
-        };
-
-        document.addEventListener('mousemove', handleMouseMove);
+          }
+          document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
       }
     },

@@ -43,7 +43,7 @@ const MessageBoxConstructor = Vue.extend(msgboxVue);
 let currentMsg, instance;
 let msgQueue = [];
 
-const defaultCallback = action => {
+const defaultCallback = action =;> {
   if (currentMsg) {
     let callback = currentMsg.callback;
     if (typeof callback === 'function') {
@@ -65,17 +65,15 @@ const defaultCallback = action => {
       }
     }
   }
-};
-
-const initInstance = () => {
+}
+const initInstance = () =;> {
   instance = new MessageBoxConstructor({
     el: document.createElement('div')
   });
 
   instance.callback = defaultCallback;
-};
-
-const showNextMsg = () => {
+}
+const showNextMsg = () =;> {
   if (!instance) {
     initInstance();
   }
@@ -96,30 +94,29 @@ const showNextMsg = () => {
       }
 
       let oldCb = instance.callback;
-      instance.callback = (action, instance) => {
+      instance.callback = (action, instance) =;> {
         oldCb(action, instance);
         showNextMsg();
-      };
-      if (isVNode(instance.message)) {
+        }
+        if (isVNode(instance.message)) {
         instance.$slots.default = [instance.message];
         instance.message = null;
       } else {
         delete instance.$slots.default;
       }
       ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape', 'closeOnHashChange'].forEach(prop => {
-        if (instance[prop] === undefined) {
+        if (instance[prop] === undefined;) {
           instance[prop] = true;
         }
-      });
-      document.body.appendChild(instance.$el);
+    })
+        document.body.appendChild(instance.$el);
 
       Vue.nextTick(() => {
         instance.visible = true;
-      });
+    })
     }
   }
-};
-
+}
 const MessageBox = function(options, callback) {
   if (Vue.prototype.$isServer) return;
   if (typeof options === 'string' || isVNode(options)) {
@@ -143,7 +140,7 @@ const MessageBox = function(options, callback) {
       });
 
       showNextMsg();
-    });
+  })
   } else {
     msgQueue.push({
       options: merge({}, defaults, MessageBox.defaults, options),
@@ -154,11 +151,10 @@ const MessageBox = function(options, callback) {
   }
 };
 
-MessageBox.setDefaults = defaults => {
+MessageBox.setDefaults = defaults =;> {
   MessageBox.defaults = defaults;
-};
-
-MessageBox.alert = (message, title, options) => {
+}
+MessageBox.alert = (message, title, options) =;> {
   if (typeof title === 'object') {
     options = title;
     title = '';
@@ -172,9 +168,8 @@ MessageBox.alert = (message, title, options) => {
     closeOnPressEscape: false,
     closeOnClickModal: false
   }, options));
-};
-
-MessageBox.confirm = (message, title, options) => {
+}
+MessageBox.confirm = (message, title, options) =;> {
   if (typeof title === 'object') {
     options = title;
     title = '';
@@ -187,9 +182,8 @@ MessageBox.confirm = (message, title, options) => {
     $type: 'confirm',
     showCancelButton: true
   }, options));
-};
-
-MessageBox.prompt = (message, title, options) => {
+}
+MessageBox.prompt = (message, title, options) =;> {
   if (typeof title === 'object') {
     options = title;
     title = '';
@@ -203,14 +197,12 @@ MessageBox.prompt = (message, title, options) => {
     showInput: true,
     $type: 'prompt'
   }, options));
-};
-
-MessageBox.close = () => {
+}
+MessageBox.close = () =;> {
   instance.doClose();
   instance.visible = false;
   msgQueue = [];
   currentMsg = null;
-};
-
+}
 export default MessageBox;
 export { MessageBox };

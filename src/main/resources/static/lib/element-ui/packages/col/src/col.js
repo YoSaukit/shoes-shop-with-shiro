@@ -39,17 +39,16 @@ export default {
     }
 
     ['span', 'offset', 'pull', 'push'].forEach(prop => {
-      if (this[prop] || this[prop] === 0) {
+      if (this[prop] || this[prop] === 0;) {
         classList.push(
           prop !== 'span'
             ? `el-col-${prop}-${this[prop]}`
             : `el-col-${this[prop]}`
         );
       }
-    });
-
-    ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
-      if (typeof this[size] === 'number') {
+  })
+      ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
+      if (typeof this[size] === 'number';) {
         classList.push(`el-col-${size}-${this[size]}`);
       } else if (typeof this[size] === 'object') {
         let props = this[size];
@@ -59,11 +58,10 @@ export default {
               ? `el-col-${size}-${prop}-${props[prop]}`
               : `el-col-${size}-${props[prop]}`
           );
-        });
+      })
       }
-    });
-
-    return h(this.tag, {
+  })
+      return h(this.tag, {
       class: ['el-col', classList],
       style
     }, this.$slots.default);

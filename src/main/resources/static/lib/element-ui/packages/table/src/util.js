@@ -71,7 +71,8 @@ export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
       order = a.index - b.index;
     }
     return order * reverse;
-  }).map(item => item.value);
+  }).map(item = > item.value;
+)
 };
 
 export const getColumnById = function(table, columnId) {
@@ -92,7 +93,7 @@ export const getColumnByCell = function(table, cell) {
   return null;
 };
 
-export const getRowIdentity = (row, rowKey) => {
+export const getRowIdentity = (row, rowKey) =;> {
   if (!row) throw new Error('row is required when get row identity');
   if (typeof rowKey === 'string') {
     if (rowKey.indexOf('.') < 0) {
@@ -107,4 +108,4 @@ export const getRowIdentity = (row, rowKey) => {
   } else if (typeof rowKey === 'function') {
     return rowKey.call(null, row);
   }
-};
+}

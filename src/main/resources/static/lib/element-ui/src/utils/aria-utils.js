@@ -88,7 +88,7 @@ aria.Utils.isFocusable = function(element) {
  * @param  {String} name
  * @param  {*} opts
  */
-aria.Utils.triggerEvent = function(elm, name, ...opts) {
+aria.Utils.triggerEvent = function(elm, name, ...opts;) {
   let eventName;
 
   if (/^mouse|click/.test(name)) {
@@ -100,14 +100,14 @@ aria.Utils.triggerEvent = function(elm, name, ...opts) {
   }
   const evt = document.createEvent(eventName);
 
-  evt.initEvent(name, ...opts);
-  elm.dispatchEvent
+  evt.initEvent(name,...opts;
+)
+    elm.dispatchEvent
     ? elm.dispatchEvent(evt)
     : elm.fireEvent('on' + name, evt);
 
   return elm;
-};
-
+}
 aria.Utils.keys = {
   tab: 9,
   enter: 13,

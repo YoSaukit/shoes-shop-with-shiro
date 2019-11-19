@@ -97,10 +97,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
             example.createCriteria().andCondition("lower(name)=", name.toLowerCase());
         }
         List<Role> roles = this.selectByExample(example);
-        if (roles.size() > 0) {
-            return false;
-        }
-        return true;
+        return roles.size() <= 0;
     }
 
     private void saveRoleMenu(RoleWithMenu role) {

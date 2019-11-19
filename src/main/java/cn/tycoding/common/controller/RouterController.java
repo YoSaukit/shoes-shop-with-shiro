@@ -127,4 +127,10 @@ public class RouterController {
     public String movie() {
         return "page/web/movie";
     }
+    /**
+     * 百丽商城
+     */
+    @GetMapping("/item/shop")
+    @RequiresPermissions("shop:list")
+    public String list(){return "page/item/shop/index";}
 }

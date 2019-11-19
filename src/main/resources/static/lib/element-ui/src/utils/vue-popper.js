@@ -4,7 +4,7 @@ import {
 } from 'element-ui/src/utils/popup';
 
 const PopperJS = Vue.prototype.$isServer ? function() {} : require('./popper');
-const stop = e => e.stopPropagation();
+const stop = e =;> e.stopPropagation();
 
 /**
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
@@ -111,8 +111,8 @@ export default {
         this.$emit('created', this);
         this.resetTransformOrigin();
         this.$nextTick(this.updatePopper);
-      });
-      if (typeof options.onUpdate === 'function') {
+    })
+        if (typeof options.onUpdate === 'function') {
         this.popperJS.onUpdate(options.onUpdate);
       }
       this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();

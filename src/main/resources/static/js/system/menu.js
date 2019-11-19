@@ -1,12 +1,12 @@
 let app = new Vue({
     el: '#app',
     data() {
-        var validateName = (rule, value, callback) => {
+        var validateName = (rule, value, callback) =;> {
             if (!value) {
                 return callback(new Error('名称不能为空'))
             }
             this.$http.get(api.system.menu.checkName(value, this.form.id)).then(response => {
-                if (response.body.code != 200) {
+                if (response.body.code != 200;) {
                     callback(new Error(response.body.msg))
                 } else {
                     callback();
@@ -64,10 +64,10 @@ let app = new Vue({
     created() {
         window.onload = function() {
             app.changeDiv();
-        }
+        };
         window.onresize = function() {
             app.changeDiv();
-        }
+        };
         this.init(); //初始化
         this.search(this.pageConf.pageCode, this.pageConf.pageSize);
     },
@@ -87,7 +87,7 @@ let app = new Vue({
         init() {
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
-                if (response.body.code == 200) {
+                if (response.body.code == 200;) {
                     this.tree = response.body.data;
                 }
             })
@@ -104,7 +104,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            })
+            };)
         },
 
         //获取菜单列表
@@ -149,7 +149,7 @@ let app = new Vue({
             if (id == null) {
                 this.dialogTitle = '新增菜单/按钮'
             } else {
-                this.dialogTitle = '修改菜单/按钮'
+                this.dialogTitle = '修改菜单/按钮';
                 this.$http.get(api.system.menu.findById(id)).then(response => {
                     this.form = response.body.data;
                     this.form.pid = [response.body.data.parentId]
@@ -161,11 +161,11 @@ let app = new Vue({
             if (this.$refs.form != undefined) {
                 this.$refs.form.resetFields();
             }
-            this.form.id = ''
-            this.form.name = ''
-            this.form.icon = ''
-            this.form.url = ''
-            this.form.description = ''
+            this.form.id = '';
+            this.form.name = '';
+            this.form.icon = '';
+            this.form.url = '';
+            this.form.description = '';
             this.form.parentId = []
         },
         //保存
@@ -177,7 +177,7 @@ let app = new Vue({
                     if (this.form.id == null || this.form.id == 0) {
                         //添加
                         this.$http.post(api.system.menu.add, JSON.stringify(this.form)).then(response => {
-                            if (response.body.code == 200) {
+                            if (response.body.code == 200;) {
                                 this._notify(response.body.msg, 'success')
                             } else {
                                 this._notify(response.body.msg, 'error')
@@ -189,7 +189,7 @@ let app = new Vue({
                     } else {
                         //修改
                         this.$http.post(api.system.menu.update, JSON.stringify(this.form)).then(response => {
-                            if (response.body.code == 200) {
+                            if (response.body.code == 200;) {
                                 this._notify(response.body.msg, 'success')
                             } else {
                                 this._notify(response.body.msg, 'error')
@@ -220,7 +220,7 @@ let app = new Vue({
 
         //Table选中触发事件
         selectChange(val) {
-            this.selectIds = []
+            this.selectIds = [];
             val.forEach(row => {
                 this.selectIds.push(row.id)
             })
@@ -237,7 +237,7 @@ let app = new Vue({
                 type: 'warning'
             }).then(() => {
                 this.$http.post(api.system.menu.delete, JSON.stringify(this.selectIds)).then(response => {
-                    if (response.body.code == 200) {
+                    if (response.body.code == 200;) {
                         this._notify('删除成功', 'success')
                     } else {
                         this._notify(response.body.msg, 'error')
@@ -249,7 +249,7 @@ let app = new Vue({
                 })
             }).catch(() => {
                 this._notify('已取消删除', 'info')
-            });
+        })
         },
 
         //触发导出按钮

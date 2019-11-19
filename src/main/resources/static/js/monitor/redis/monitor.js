@@ -22,10 +22,10 @@ let app = new Vue({
     created() {
         window.onload = function() {
             app.changeDiv();
-        }
+        };
         window.onresize = function() {
             app.changeDiv();
-        }
+        };
         this.init(); //初始化
     },
     mounted() {
@@ -46,7 +46,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            })
+            };)
         },
         /**
          * 初始化
@@ -66,7 +66,7 @@ let app = new Vue({
             })
             var $this = this;
             $this.$http.get(api.monitor.redis.memory).then(response => {
-                if (response.body.code == 200) {
+                if (response.body.code == 200;) {
                     Highcharts.chart('memory', {
                         chart: {
                             type: 'spline',
@@ -140,7 +140,7 @@ let app = new Vue({
             })
 
             this.$http.get(api.monitor.redis.dbsize).then(response => {
-                if (response.body.code == 200) {
+                if (response.body.code == 200;) {
                     Highcharts.chart('dbsize', {
                         chart: {
                             type: "spline",
@@ -151,7 +151,7 @@ let app = new Vue({
                                     var series = this.series[0];
                                     setInterval(function() {
                                         $this.$http.get(api.monitor.redis.dbsize).then(response => {
-                                            if (response.body.code == 200) {
+                                            if (response.body.code == 200;) {
                                                 var data = response.body.data;
                                                 var x = data.create_time, y = data.dbsize;
                                                 series.addPoint([x, y], true, true);

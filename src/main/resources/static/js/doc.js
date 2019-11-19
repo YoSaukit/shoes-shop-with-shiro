@@ -16,10 +16,10 @@ let app = new Vue({
     created() {
         window.onload = function() {
             app.changeDiv();
-        }
+        };
         window.onresize = function() {
             app.changeDiv();
-        }
+        };
         this.init(); //初始化
     },
     mounted() {
@@ -44,9 +44,9 @@ let app = new Vue({
                 if (valid) {
                     this.$http.get(api.common.updatePassword(this.newpass.password)).then(response => {
                         window.location.href = '/logout';
-                    })
+                    }
                 }
-            })
+            };)
         },
 
         /**

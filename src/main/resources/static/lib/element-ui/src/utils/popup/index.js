@@ -82,7 +82,7 @@ export default {
           this.rendered = true;
           Vue.nextTick(() => {
             this.open();
-          });
+        })
         } else {
           this.open();
         }
@@ -111,7 +111,9 @@ export default {
         this._openTimer = setTimeout(() => {
           this._openTimer = null;
           this.doOpen(props);
-        }, openDelay);
+      },
+          openDelay;
+      )
       } else {
         this.doOpen(props);
       }
@@ -186,7 +188,9 @@ export default {
         this._closeTimer = setTimeout(() => {
           this._closeTimer = null;
           this.doClose();
-        }, closeDelay);
+      },
+          closeDelay;
+      )
       } else {
         this.doClose();
       }

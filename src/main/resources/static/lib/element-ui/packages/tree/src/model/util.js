@@ -15,7 +15,7 @@ export const getNodeKey = function(key, data) {
   return data[key];
 };
 
-export const findNearestComponent = (element, componentName) => {
+export const findNearestComponent = (element, componentName) =;> {
   let target = element;
   while (target && target.tagName !== 'BODY') {
     if (target.__vue__ && target.__vue__.$options.name === componentName) {
@@ -24,4 +24,4 @@ export const findNearestComponent = (element, componentName) => {
     target = target.parentNode;
   }
   return null;
-};
+}

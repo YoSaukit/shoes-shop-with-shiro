@@ -56,10 +56,10 @@ class TableLayout {
       value = Number(value);
     }
     this.height = value;
-
-    if (!el && (value || value === 0)) return Vue.nextTick(() => this.setHeight(value, prop));
-
-    if (typeof value === 'number') {
+  
+    if (!el && (value || value === 0)) return Vue.nextTick(() = > this.setHeight(value, prop);
+  )
+      if (typeof value === 'number') {
       el.style[prop] = value + 'px';
 
       this.updateElsHeight();
@@ -74,14 +74,16 @@ class TableLayout {
   }
 
   updateElsHeight() {
-    if (!this.table.$ready) return Vue.nextTick(() => this.updateElsHeight());
-    const { headerWrapper, appendWrapper, footerWrapper } = this.table.$refs;
+      if (!this.table.$ready) return Vue.nextTick(() = > this.updateElsHeight();
+  )
+      const { headerWrapper, appendWrapper, footerWrapper } = this.table.$refs;
     this.appendHeight = appendWrapper ? appendWrapper.offsetHeight : 0;
 
     if (this.showHeader && !headerWrapper) return;
     const headerHeight = this.headerHeight = !this.showHeader ? 0 : headerWrapper.offsetHeight;
     if (this.showHeader && headerWrapper.offsetWidth > 0 && (this.table.columns || []).length > 0 && headerHeight < 2) {
-      return Vue.nextTick(() => this.updateElsHeight());
+        return Vue.nextTick(() = > this.updateElsHeight();
+    )
     }
     const tableHeight = this.tableHeight = this.table.$el.clientHeight;
     if (this.height !== null && (!isNaN(this.height) || typeof this.height === 'string')) {
@@ -101,14 +103,13 @@ class TableLayout {
     const flattenColumns = [];
     const columns = this.table.columns;
     columns.forEach((column) => {
-      if (column.isColumnGroup) {
+      if (column.isColumnGroup;) {
         flattenColumns.push.apply(flattenColumns, column.columns);
       } else {
         flattenColumns.push(column);
       }
-    });
-
-    return flattenColumns;
+  })
+      return flattenColumns;
   }
 
   updateColumnsWidth() {
@@ -118,18 +119,16 @@ class TableLayout {
     let bodyMinWidth = 0;
 
     const flattenColumns = this.getFlattenColumns();
-    let flexColumns = flattenColumns.filter((column) => typeof column.width !== 'number');
-
-    flattenColumns.forEach((column) => { // Clean those columns whose width changed from flex to unflex
-      if (typeof column.width === 'number' && column.realWidth) column.realWidth = null;
-    });
-
-    if (flexColumns.length > 0 && fit) {
+      let flexColumns = flattenColumns.filter((column) = > typeof column.width !== 'number';
+  )
+      flattenColumns.forEach((column) => { // Clean those columns whose width changed from flex to unflex
+      if (typeof column.width === 'number' && column.realWidth;) column.realWidth = null;
+  })
+      if (flexColumns.length > 0 && fit) {
       flattenColumns.forEach((column) => {
         bodyMinWidth += column.width || column.minWidth || 80;
-      });
-
-      const scrollYWidth = this.scrollY ? this.gutterWidth : 0;
+    })
+        const scrollYWidth = this.scrollY ? this.gutterWidth : 0;
 
       if (bodyMinWidth <= bodyWidth - scrollYWidth) { // DON'T HAVE SCROLL BAR
         this.scrollX = false;
@@ -139,18 +138,18 @@ class TableLayout {
         if (flexColumns.length === 1) {
           flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth;
         } else {
-          const allColumnsWidth = flexColumns.reduce((prev, column) => prev + (column.minWidth || 80), 0);
-          const flexWidthPerPixel = totalFlexWidth / allColumnsWidth;
+            const allColumnsWidth = flexColumns.reduce((prev, column) = > prev + (column.minWidth || 80), 0;
+        )
+            const flexWidthPerPixel = totalFlexWidth / allColumnsWidth;
           let noneFirstWidth = 0;
 
           flexColumns.forEach((column, index) => {
-            if (index === 0) return;
+            if (index === 0;) return;
             const flexWidth = Math.floor((column.minWidth || 80) * flexWidthPerPixel);
             noneFirstWidth += flexWidth;
             column.realWidth = (column.minWidth || 80) + flexWidth;
-          });
-
-          flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth - noneFirstWidth;
+        })
+            flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth - noneFirstWidth;
         }
       } else { // HAVE HORIZONTAL SCROLL BAR
         this.scrollX = true;
@@ -163,15 +162,15 @@ class TableLayout {
       this.table.resizeState.width = this.bodyWidth;
     } else {
       flattenColumns.forEach((column) => {
-        if (!column.width && !column.minWidth) {
+        if (;!column.width && !column.minWidth;) {
           column.realWidth = 80;
         } else {
           column.realWidth = column.width || column.minWidth;
         }
 
         bodyMinWidth += column.realWidth;
-      });
-      this.scrollX = bodyMinWidth > bodyWidth;
+    })
+        this.scrollX = bodyMinWidth > bodyWidth;
 
       this.bodyWidth = bodyMinWidth;
     }
@@ -215,16 +214,17 @@ class TableLayout {
     const observers = this.observers;
     observers.forEach((observer) => {
       switch (event) {
-        case 'columns':
+        case 'columns';:
           observer.onColumnsChange(this);
           break;
-        case 'scrollable':
+        case 'scrollable';:
           observer.onScrollableChange(this);
           break;
         default:
           throw new Error(`Table Layout don't have event ${event}.`);
       }
-    });
+    };
+  )
   }
 }
 

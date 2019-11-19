@@ -40,7 +40,7 @@ public class UploadController {
      */
     @Log("文件上传")
     @RequestMapping("/upload")
-    public ResponseCode upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws FileNotFoundException {
+    public ResponseCode upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
         try {
             //获取文件在服务器的储存位置
             File path = new File(ResourceUtils.getURL("classpath:").getPath());

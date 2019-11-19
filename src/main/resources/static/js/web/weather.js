@@ -20,10 +20,10 @@ let app = new Vue({
     created() {
         window.onload = function() {
             app.changeDiv();
-        }
+        };
         window.onresize = function() {
             app.changeDiv();
-        }
+        };
         this.init(); //初始化
     },
     mounted() {
@@ -59,14 +59,14 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            })
+            };)
         },
 
         //查询
         search() {
             this.cityIds = this.citys[0].areaid;
             this.$http.get(api.web.weather.search(this.cityIds)).then(response => {
-                if (response.body.code == 200) {
+                if (response.body.code == 200;) {
                     this.weather = response.body.data;
                     var data = response.body.data;
                     var countyName = data.city;
@@ -193,11 +193,13 @@ let app = new Vue({
             if (query !== '') {
                 setTimeout(() => {
                     this.citys = this.cityData.filter(item => {
-                        if (item.countyname.indexOf(query) > -1) {
+                        if (item.countyname.indexOf(query) > -1;) {
                             return item.areaid;
                         }
-                    });
-                }, 200);
+            })
+            },
+                200;
+            )
             } else {
                 this.citys = [];
             }

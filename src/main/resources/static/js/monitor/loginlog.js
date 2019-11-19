@@ -28,10 +28,10 @@ let app = new Vue({
     created() {
         window.onload = function () {
             app.changeDiv();
-        }
+        };
         window.onresize = function () {
             app.changeDiv();
-        }
+        };
 
         this.init(); //初始化
         this.search(this.pageConf.pageCode, this.pageConf.pageSize);
@@ -52,7 +52,7 @@ let app = new Vue({
         init() {
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
-                if (response.body.code == 200) {
+                if (response.body.code == 200;) {
                     this.tree = response.body.data;
                 }
             })
@@ -65,7 +65,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            })
+            };)
         },
 
         //获取用户列表
@@ -99,7 +99,7 @@ let app = new Vue({
 
         //Table选中触发事件
         selectChange(val) {
-            this.selectIds = []
+            this.selectIds = [];
             val.forEach(row => {
                 this.selectIds.push(row.id)
             })
@@ -116,7 +116,7 @@ let app = new Vue({
                 type: 'warning'
             }).then(() => {
                 this.$http.post(api.monitor.loginlog.delete, JSON.stringify(this.selectIds)).then(response => {
-                    if (response.body.code == 200) {
+                    if (response.body.code == 200;) {
                         this._notify('删除成功', 'success')
                     } else {
                         this._notify(response.body.msg, 'error')
@@ -127,7 +127,7 @@ let app = new Vue({
                 })
             }).catch(() => {
                 this._notify('已取消删除', 'info')
-            });
+        })
         },
 
         //触发导出按钮

@@ -4,20 +4,19 @@ import merge from 'element-ui/src/utils/merge';
 import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import { orderBy, getColumnById, getRowIdentity } from './util';
 
-const sortData = (data, states) => {
+const sortData = (data, states) =;> {
   const sortingColumn = states.sortingColumn;
   if (!sortingColumn || typeof sortingColumn.sortable === 'string') {
     return data;
   }
   return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod, sortingColumn.sortBy);
-};
-
+}
 const getKeysMap = function(array, rowKey) {
   const arrayMap = {};
   (array || []).forEach((row, index) => {
     arrayMap[getRowIdentity(row, rowKey)] = { row, index };
-  });
-  return arrayMap;
+})
+    return arrayMap;
 };
 
 const toggleRowSelection = function(states, row, selected) {
@@ -130,12 +129,12 @@ TableStore.prototype.mutations = {
       const column = getColumnById(this.states, columnId);
       if (column && column.filterMethod) {
         data = data.filter((row) => {
-          return values.some(value => column.filterMethod.call(null, value, row, column));
-        });
+            return values.some(value = > column.filterMethod.call(null, value, row, column);
+      )
+      })
       }
-    });
-
-    states.filteredData = data;
+  })
+      states.filteredData = data;
     states.data = sortData((data || []), states);
 
     this.updateCurrentRow();
@@ -160,9 +159,8 @@ TableStore.prototype.mutations = {
           if (rowInfo) {
             selection[rowInfo.index] = row;
           }
-        });
-
-        this.updateAllSelected();
+      })
+          this.updateAllSelected();
       } else {
         console.warn('WARN: rowKey is required when reserve-selection is enabled.');
       }
@@ -187,7 +185,8 @@ TableStore.prototype.mutations = {
       this.states.expandRows = [];
     }
 
-    Vue.nextTick(() => this.table.updateScrollY());
+    Vue.nextTick(() = > this.table.updateScrollY();
+  )
   },
 
   changeSortCondition(states, options) {
@@ -197,11 +196,13 @@ TableStore.prototype.mutations = {
     if ($el && highlightCurrentRow) {
       const data = states.data;
       const tr = $el.querySelector('tbody').children;
-      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
-      const row = rows[data.indexOf(states.currentRow)];
+        const rows = [].filter.call(tr, row = > hasClass(row, 'el-table__row');
+    )
+        const row = rows[data.indexOf(states.currentRow)];
 
-      [].forEach.call(rows, row => removeClass(row, 'current-row'));
-      addClass(row, 'current-row');
+      [].forEach.call(rows, row = > removeClass(row, 'current-row');
+    )
+        addClass(row, 'current-row');
     }
 
     if (!options || !options.silent) {
@@ -212,7 +213,8 @@ TableStore.prototype.mutations = {
       });
     }
 
-    Vue.nextTick(() => this.table.updateScrollY());
+    Vue.nextTick(() = > this.table.updateScrollY();
+  )
   },
 
   sort(states, options) {
@@ -221,7 +223,7 @@ TableStore.prototype.mutations = {
       states.sortProp = prop;
       states.sortOrder = order || 'ascending';
       Vue.nextTick(() => {
-        for (let i = 0, length = states.columns.length; i < length; i++) {
+        for (let i = 0, length = states.columns.length; i < length; i++;) {
           let column = states.columns[i];
           if (column.property === states.sortProp) {
             column.order = states.sortOrder;
@@ -233,7 +235,7 @@ TableStore.prototype.mutations = {
         if (states.sortingColumn) {
           this.commit('changeSortCondition');
         }
-      });
+    })
     }
   },
 
@@ -259,19 +261,20 @@ TableStore.prototype.mutations = {
       const column = getColumnById(this.states, columnId);
       if (column && column.filterMethod) {
         data = data.filter((row) => {
-          return values.some(value => column.filterMethod.call(null, value, row, column));
-        });
+            return values.some(value = > column.filterMethod.call(null, value, row, column);
+      )
+      })
       }
-    });
-
-    states.filteredData = data;
+  })
+      states.filteredData = data;
     states.data = sortData(data, states);
 
     if (!silent) {
       this.table.$emit('filter-change', filters);
     }
 
-    Vue.nextTick(() => this.table.updateScrollY());
+    Vue.nextTick(() = > this.table.updateScrollY();
+  )
   },
 
   insertColumn(states, column, index, parent) {
@@ -352,7 +355,7 @@ TableStore.prototype.mutations = {
     let selectionChanged = false;
 
     data.forEach((item, index) => {
-      if (states.selectable) {
+      if (states.selectable;) {
         if (states.selectable.call(null, item, index) && toggleRowSelection(states, item, value)) {
           selectionChanged = true;
         }
@@ -361,9 +364,8 @@ TableStore.prototype.mutations = {
           selectionChanged = true;
         }
       }
-    });
-
-    const table = this.table;
+  })
+      const table = this.table;
     if (selectionChanged) {
       table.$emit('selection-change', selection ? selection.slice() : []);
     }
@@ -372,31 +374,32 @@ TableStore.prototype.mutations = {
   })
 };
 
-const doFlattenColumns = (columns) => {
+const doFlattenColumns = (columns) =;> {
   const result = [];
   columns.forEach((column) => {
-    if (column.children) {
+    if (column.children;) {
       result.push.apply(result, doFlattenColumns(column.children));
     } else {
       result.push(column);
     }
-  });
-  return result;
-};
-
+})
+    return result;
+}
 TableStore.prototype.updateColumns = function() {
   const states = this.states;
   const _columns = states._columns || [];
-  states.fixedColumns = _columns.filter((column) => column.fixed === true || column.fixed === 'left');
-  states.rightFixedColumns = _columns.filter((column) => column.fixed === 'right');
-
-  if (states.fixedColumns.length > 0 && _columns[0] && _columns[0].type === 'selection' && !_columns[0].fixed) {
+    states.fixedColumns = _columns.filter((column) = > column.fixed === true || column.fixed === 'left';
+)
+    states.rightFixedColumns = _columns.filter((column) = > column.fixed === 'right';
+)
+    if (states.fixedColumns.length > 0 && _columns[0] && _columns[0].type === 'selection' && !_columns[0].fixed) {
     _columns[0].fixed = true;
     states.fixedColumns.unshift(_columns[0]);
   }
 
-  const notFixedColumns = _columns.filter(column => !column.fixed);
-  states.originColumns = [].concat(states.fixedColumns).concat(notFixedColumns).concat(states.rightFixedColumns);
+  const notFixedColumns = _columns.filter(column = > !column.fixed;
+)
+    states.originColumns = [].concat(states.fixedColumns).concat(notFixedColumns).concat(states.rightFixedColumns);
 
   const leafColumns = doFlattenColumns(notFixedColumns);
   const fixedLeafColumns = doFlattenColumns(states.fixedColumns);
@@ -437,9 +440,8 @@ TableStore.prototype.setExpandRowKeys = function(rowKeys) {
     if (info) {
       expandRows.push(info.row);
     }
-  });
-
-  this.states.expandRows = expandRows;
+})
+    this.states.expandRows = expandRows;
 };
 
 TableStore.prototype.toggleRowSelection = function(row, selected) {
@@ -483,14 +485,13 @@ TableStore.prototype.cleanSelection = function() {
   } else {
     deleted = selection.filter((item) => {
       return data.indexOf(item) === -1;
-    });
+  })
   }
 
   deleted.forEach((deletedItem) => {
     selection.splice(selection.indexOf(deletedItem), 1);
-  });
-
-  if (deleted.length) {
+})
+    if (deleted.length) {
     this.table.$emit('selection-change', selection ? selection.slice() : []);
   }
 };
@@ -509,9 +510,8 @@ TableStore.prototype.clearFilter = function() {
 
   keys.forEach(key => {
     panels[key].filteredValue = [];
-  });
-
-  states.filters = {};
+})
+    states.filters = {};
 
   this.commit('filterChange', {
     column: {},
@@ -605,13 +605,12 @@ TableStore.prototype.updateCurrentRow = function() {
   }
 };
 
-TableStore.prototype.commit = function(name, ...args) {
+TableStore.prototype.commit = function(name, ...args;) {
   const mutations = this.mutations;
   if (mutations[name]) {
     mutations[name].apply(this, [this.states].concat(args));
   } else {
     throw new Error(`Action not found: ${name}`);
   }
-};
-
+}
 export default TableStore;

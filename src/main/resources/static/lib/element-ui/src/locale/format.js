@@ -16,7 +16,7 @@ export default function(Vue) {
    * @return {String}
    */
 
-  function template(string, ...args) {
+  function template(string, ...args;) {
     if (args.length === 1 && typeof args[0] === 'object') {
       args = args[0];
     }
@@ -39,8 +39,8 @@ export default function(Vue) {
 
         return result;
       }
-    });
-  }
+    })
+    }
 
   return template;
 }

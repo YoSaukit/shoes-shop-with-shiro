@@ -50,7 +50,7 @@ export default function upload(option) {
   if (option.data) {
     Object.keys(option.data).forEach(key => {
       formData.append(key, option.data[key]);
-    });
+  })
   }
 
   formData.append(option.filename, option.file, option.file.name);

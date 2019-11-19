@@ -6,4 +6,4 @@ export default {
       return t.apply(this, args);
     }
   }
-};
+}

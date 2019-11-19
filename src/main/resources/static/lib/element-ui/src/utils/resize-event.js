@@ -9,7 +9,7 @@ const resizeHandler = function(entries) {
     if (listeners.length) {
       listeners.forEach(fn => {
         fn();
-      });
+    })
     }
   }
 };

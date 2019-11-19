@@ -28,27 +28,28 @@ export default {
   },
 
   render(h) {
-    const columnsHidden = this.columns.map((column, index) => this.isColumnHidden(index));
-    return (
-      <table
-        class="el-table__body"
-        cellspacing="0"
-        cellpadding="0"
+      const columnsHidden = this.columns.map((column, index) = > this.isColumnHidden(index);
+  )
+      return (
+      <table;
+        class="el-table__body";
+        cellspacing="0";
+        cellpadding="0";
         border="0">
         <colgroup>
           {
-            this._l(this.columns, column => <col name={ column.id } />)
+            this._l(this.columns, column => <col; name={ column.id } />)
           }
         </colgroup>
         <tbody>
           {
             this._l(this.data, (row, $index) =>
-              [<tr
+              [<tr;
                 style={ this.rowStyle ? this.getRowStyle(row, $index) : null }
                 key={ this.table.rowKey ? this.getKeyOfRow(row, $index) : $index }
-                on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
-                on-click={ ($event) => this.handleClick($event, row) }
-                on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
+                on-dblclick={ ($event) =;> this.handleDoubleClick($event, row) }
+                on-click={ ($event) =;> this.handleClick($event, row) }
+                on-contextmenu={ ($event) =;> this.handleContextMenu($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
                 class={ [this.getRowClass(row, $index)] }>
@@ -60,10 +61,10 @@ export default {
                     } else {
                       if (rowspan === 1 && colspan === 1) {
                         return (
-                          <td
+                          <td;
                             style={ this.getCellStyle($index, cellIndex, row, column) }
                             class={ this.getCellClass($index, cellIndex, row, column) }
-                            on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                            on-mouseenter={ ($event) =;> this.handleCellMouseEnter($event, row) }
                             on-mouseleave={ this.handleCellMouseLeave }>
                             {
                               column.renderCell.call(
@@ -79,16 +80,16 @@ export default {
                                 columnsHidden[cellIndex]
                               )
                             }
-                          </td>
-                        );
+                          </td>;
+                      )
                       } else {
                         return (
-                          <td
+                          <td;
                             style={ this.getCellStyle($index, cellIndex, row, column) }
                             class={ this.getCellClass($index, cellIndex, row, column) }
-                            rowspan={ rowspan }
-                            colspan={ colspan }
-                            on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                            rowspan={ rowspan };
+                            colspan={ colspan };
+                            on-mouseenter={ ($event) =;> this.handleCellMouseEnter($event, row) }
                             on-mouseleave={ this.handleCellMouseLeave }>
                             {
                               column.renderCell.call(
@@ -104,28 +105,28 @@ export default {
                                 columnsHidden[cellIndex]
                               )
                             }
-                          </td>
-                        );
+                          </td>;
+                      )
                       }
                     }
                   })
                 }
-              </tr>,
+              </tr>,;
               this.store.isRowExpanded(row)
                 ? (<tr>
                   <td colspan={ this.columns.length } class="el-table__expanded-cell">
                     { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
                   </td>
-                </tr>)
-                : ''
+                </tr>);
+                : '';
               ]
             ).concat(
-              <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
+              <el-tooltip; effect={ this.table.tooltipEffect } placement="top"; ref="tooltip"; content={ this.tooltipContent }></el-tooltip>;
             )
           }
         </tbody>
-      </table>
-    );
+      </table>;
+  )
   },
 
   watch: {
@@ -134,8 +135,9 @@ export default {
       const el = this.$el;
       if (!el) return;
       const tr = el.querySelector('tbody').children;
-      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
-      const oldRow = rows[oldVal];
+        const rows = [].filter.call(tr, row = > hasClass(row, 'el-table__row');
+    )
+        const oldRow = rows[oldVal];
       const newRow = rows[newVal];
       if (oldRow) {
         removeClass(oldRow, 'hover-row');
@@ -150,13 +152,15 @@ export default {
       if (!el) return;
       const data = this.store.states.data;
       const tr = el.querySelector('tbody').children;
-      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
-      const oldRow = rows[data.indexOf(oldVal)];
+        const rows = [].filter.call(tr, row = > hasClass(row, 'el-table__row');
+    )
+        const oldRow = rows[data.indexOf(oldVal)];
       const newRow = rows[data.indexOf(newVal)];
       if (oldRow) {
         removeClass(oldRow, 'current-row');
       } else {
-        [].forEach.call(rows, row => removeClass(row, 'current-row'));
+          [].forEach.call(rows, row = > removeClass(row, 'current-row');
+      )
       }
       if (newRow) {
         addClass(newRow, 'current-row');
@@ -205,7 +209,8 @@ export default {
   },
 
   created() {
-    this.activateTooltip = debounce(50, tooltip => tooltip.handleShowPopper());
+      this.activateTooltip = debounce(50, tooltip = > tooltip.handleShowPopper();
+  )
   },
 
   methods: {

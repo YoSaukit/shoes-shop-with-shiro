@@ -49,10 +49,10 @@ aria.Dialog = function(dialog, focusAfterClosed, focusFirst) {
   }
 
   this.lastFocus = document.activeElement;
-  tabEvent = (e) => {
+  tabEvent = (e) =;> {
     this.trapFocus(e);
-  };
-  this.addListeners();
+    }
+    this.addListeners();
 };
 
 aria.Dialog.prototype.addListeners = function() {
@@ -68,7 +68,7 @@ aria.Dialog.prototype.closeDialog = function() {
   if (this.focusAfterClosed) {
     setTimeout(() => {
       this.focusAfterClosed.focus();
-    });
+  })
   }
 };
 

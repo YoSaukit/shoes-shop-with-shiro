@@ -2,12 +2,12 @@
 let app = new Vue({
     el: '#app',
     data() {
-        var validateName = (rule, value, callback) => {
+        var validateName = (rule, value, callback) =;> {
             if (!value) {
                 return callback(new Error('名称不能为空'))
             }
             this.$http.get(api.system.dept.checkName(value, this.form.id)).then(response => {
-                if (response.body.code != 200) {
+                if (response.body.code != 200;) {
                     callback(new Error(response.body.msg))
                 } else {
                     callback();
@@ -59,10 +59,10 @@ let app = new Vue({
     created() {
         window.onload = function() {
             app.changeDiv();
-        }
+        };
         window.onresize = function() {
             app.changeDiv();
-        }
+        };
         this.init(); //初始化
         this.search(this.pageConf.pageCode, this.pageConf.pageSize);
     },
@@ -100,7 +100,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            })
+            };)
         },
 
         //获取部门列表
@@ -137,7 +137,7 @@ let app = new Vue({
             if (id == null) {
                 this.dialogTitle = '新增部门'
             } else {
-                this.dialogTitle = '修改部门'
+                this.dialogTitle = '修改部门';
                 this.$http.get(api.system.dept.findById(id)).then(response => {
                     this.form = response.body.data;
                     if (response.body.data.parentId == null) {
@@ -153,8 +153,8 @@ let app = new Vue({
             if (this.$refs.form != undefined) {
                 this.$refs.form.resetFields();
             }
-            this.form.id = ''
-            this.form.name = ''
+            this.form.id = '';
+            this.form.name = '';
             this.form.parentId = []
         },
         //保存
@@ -162,29 +162,29 @@ let app = new Vue({
             this.$refs[form].validate((valid) => {
                 if (valid) {
                     this.dialogVisible = false;
-                    this.form.parentId = this.form.parentId[0]
+                    this.form.parentId = this.form.parentId[0];
                     if (this.form.id == null || this.form.id == 0) {
                         //添加
                         this.$http.post(api.system.dept.add, JSON.stringify(this.form)).then(response => {
-                            if (response.body.code == 200) {
+                            if (response.body.code == 200;) {
                                 this._notify(response.body.msg, 'success')
                             } else {
                                 this._notify(response.body.msg, 'error')
                             }
                             this.clearForm();
-                            this.init()
+                            this.init();
                             this.search(this.pageConf.pageCode, this.pageConf.pageSize)
                         })
                     } else {
                         //修改
                         this.$http.post(api.system.dept.update, JSON.stringify(this.form)).then(response => {
-                            if (response.body.code == 200) {
+                            if (response.body.code == 200;) {
                                 this._notify(response.body.msg, 'success')
                             } else {
                                 this._notify(response.body.msg, 'error')
                             }
                             this.clearForm();
-                            this.init()
+                            this.init();
                             this.search(this.pageConf.pageCode, this.pageConf.pageSize)
                         })
                     }
@@ -208,7 +208,7 @@ let app = new Vue({
 
         //Table选中触发事件
         selectChange(val) {
-            this.selectIds = []
+            this.selectIds = [];
             val.forEach(row => {
                 this.selectIds.push(row.id)
             })
@@ -220,7 +220,7 @@ let app = new Vue({
                 this.selectIds = [id];
             }
             if (this.selectIds.length < 1) {
-                this._notify('请至少选择一个部门', 'warning')
+                this._notify('请至少选择一个部门', 'warning');
                 return;
             }
             this.$confirm('你确定永久删除此部门？, 是否继续?', '提示', {
@@ -229,7 +229,7 @@ let app = new Vue({
                 type: 'warning'
             }).then(() => {
                 this.$http.post(api.system.dept.delete, JSON.stringify(this.selectIds)).then(response => {
-                    if (response.body.code == 200) {
+                    if (response.body.code == 200;) {
                         this._notify('删除成功', 'success')
                     } else {
                         this._notify(response.body.msg, 'error')
@@ -241,7 +241,7 @@ let app = new Vue({
                 })
             }).catch(() => {
                 this._notify('已取消删除', 'info')
-            });
+        })
         },
 
         //触发导出按钮

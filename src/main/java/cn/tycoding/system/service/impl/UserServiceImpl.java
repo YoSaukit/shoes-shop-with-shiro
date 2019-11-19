@@ -117,10 +117,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
             example.createCriteria().andCondition("lower(username)=", name.toLowerCase());
         }
         List<User> users = this.selectByExample(example);
-        if (users.size() > 0) {
-            return false;
-        }
-        return true;
+        return users.size() <= 0;
     }
 
     @Transactional

@@ -72,26 +72,27 @@ export default {
         return this.node;
       }
     }).$mount();
-
-    this.debounceClose = debounce(200, () => this.handleClosePopper());
+  
+    this.debounceClose = debounce(200, () = > this.handleClosePopper();
+  )
   },
 
   render(h) {
     if (this.popperVM) {
       this.popperVM.node = (
-        <transition
+        <transition;
           name={ this.transition }
           onAfterLeave={ this.doDestroy }>
-          <div
-            onMouseleave={ () => { this.setExpectedState(false); this.debounceClose(); } }
-            onMouseenter= { () => { this.setExpectedState(true); } }
-            ref="popper"
-            role="tooltip"
+          <div;
+            onMouseleave={ () =;> { this.setExpectedState(false); this.debounceClose(); } }
+            onMouseenter= { () =;> { this.setExpectedState(true); } }
+            ref="popper";
+            role="tooltip";
             id={this.tooltipId}
             aria-hidden={ (this.disabled || !this.showPopper) ? 'true' : 'false' }
-            v-show={!this.disabled && this.showPopper}
+            v-show={;!this.disabled && this.showPopper}
             class={
-              ['el-tooltip__popper', 'is-' + this.effect, this.popperClass]
+              ['el-tooltip__popper', 'is-' + this.effect, this.popperClass;]
             }>
             { this.$slots.content || this.content }
           </div>
@@ -118,7 +119,7 @@ export default {
       on(this.referenceElm, 'mouseenter', this.show);
       on(this.referenceElm, 'mouseleave', this.hide);
       on(this.referenceElm, 'focus', () => {
-        if (!this.$slots.default || !this.$slots.default.length) {
+        if (;!this.$slots.default || !this.$slots.default.length;) {
           this.handleFocus();
           return;
         }
@@ -128,8 +129,8 @@ export default {
         } else {
           this.handleFocus();
         }
-      });
-      on(this.referenceElm, 'blur', this.handleBlur);
+    })
+        on(this.referenceElm, 'blur', this.handleBlur);
       on(this.referenceElm, 'click', this.removeFocusing);
     }
   },
@@ -174,12 +175,15 @@ export default {
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
         this.showPopper = true;
-      }, this.openDelay);
-
-      if (this.hideAfter > 0) {
+    },
+        this.openDelay;
+    )
+        if (this.hideAfter > 0) {
         this.timeoutPending = setTimeout(() => {
           this.showPopper = false;
-        }, this.hideAfter);
+      },
+          this.hideAfter;
+      )
       }
     },
 
