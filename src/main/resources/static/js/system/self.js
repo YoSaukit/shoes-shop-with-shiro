@@ -89,9 +89,9 @@ let app = new Vue({
                 if (valid) {
                     this.$http.get(api.common.updatePassword(this.newpass.password)).then(response => {
                         window.location.href = '/logout';
-                    })
+                })
                 }
-            };)
+            })
         },
 
         //触发关闭按钮

@@ -57,7 +57,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            };)
+            })
         },
 
         getList() {

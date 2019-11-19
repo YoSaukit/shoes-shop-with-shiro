@@ -64,7 +64,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            };)
+            })
         },
 
         //获取用户列表

@@ -100,7 +100,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            };)
+            })
         },
 
         //获取部门列表

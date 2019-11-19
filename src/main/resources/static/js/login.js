@@ -48,14 +48,12 @@ let app = new Vue({
 
         //登录
         login(form) {
-            this.$refs[form].validate(valid = > {
-                if(valid) {
-                    this.$http.post(api.login, this.form).then(response = > {
-                        if(response.body.code == 200
-                )
-                    {
+            this.$refs[form].validate(valid => {
+                if (valid) {
+                    this.$http.post(api.login, this.form).then(response => {
+                        if (response.body.code == 200) {
                         //获取UserInfo
-                        this.$http.get(api.info).then(result = > {
+                        this.$http.get(api.info).then(result => {
                             //将UserInfo数据存储到浏览器的localStorage中
                             window.localStorage.setItem("info", JSON.stringify(result.body.data));
                         if (result.body.code == 200 && window.localStorage.getItem("info") != null) {
@@ -64,11 +62,8 @@ let app = new Vue({
                             this.getGifCode();
                             this._notify('获取用户信息失败', "error")
                         }
-                    })
-                        ;
-                    }
-                else
-                    {
+                    });
+                    } else {
                         this.getGifCode();
                         this.gifCode = null;
                         this.gifCode = api.gifCode;

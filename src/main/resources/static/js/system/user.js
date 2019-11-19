@@ -103,9 +103,9 @@ let app = new Vue({
                 if (valid) {
                     this.$http.get(api.common.updatePassword(this.newpass.password)).then(response => {
                         window.location.href = '/logout';
-                    })
+                })
                 }
-            };)
+            })
         },
 
         //获取用户列表

@@ -53,7 +53,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            };)
+            })
         },
 
         //详细信息

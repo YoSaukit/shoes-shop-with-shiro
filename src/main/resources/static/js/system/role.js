@@ -95,7 +95,7 @@ let app = new Vue({
                         window.location.href = '/logout';
                     })
                 }
-            };)
+            })
         },
 
         //获取角色列表
