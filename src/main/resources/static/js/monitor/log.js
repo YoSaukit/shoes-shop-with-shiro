@@ -51,7 +51,7 @@ let app = new Vue({
         init() {
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
-                if (response.body.code == 200;) {
+                if (response.body.code === 200) {
                     this.tree = response.body.data;
                 }
             })
@@ -115,7 +115,7 @@ let app = new Vue({
                 type: 'warning'
             }).then(() => {
                 this.$http.post(api.monitor.log.delete, JSON.stringify(this.selectIds)).then(response => {
-                    if (response.body.code == 200;) {
+                    if (response.body.code === 200) {
                         this._notify('删除成功', 'success')
                     } else {
                         this._notify(response.body.msg, 'error')

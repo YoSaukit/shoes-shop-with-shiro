@@ -116,7 +116,7 @@ let app = new Vue({
                 type: 'warning'
             }).then(() => {
                 this.$http.post(api.monitor.loginlog.delete, JSON.stringify(this.selectIds)).then(response => {
-                if (response.body.code == 200;) {
+                if (response.body.code === 200) {
                 this._notify('删除成功', 'success')
             } else {
                 this._notify(response.body.msg, 'error')

@@ -7,11 +7,13 @@ import cn.tycoding.system.entity.Item;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author YoSaukit
@@ -44,5 +46,15 @@ public class ItemServiceImpl extends BaseServiceImpl<Item> implements ItemServic
             e.printStackTrace();
             return new ArrayList<>();
         }
+    }
+
+    @Override
+    @Transactional
+    public void add(Item item) {
+        this.save(item);
+    }
+    @Override
+    public Item findById(int id) {
+        return itemMapper.selectByPrimaryKey(id);
     }
 }

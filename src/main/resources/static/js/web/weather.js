@@ -46,7 +46,7 @@ let app = new Vue({
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
                 let $this = response.body;
-                if ($this.code == 200) {
+                if ($this.code === 200) {
                     this.tree = $this.data;
                 }
             })
@@ -66,7 +66,7 @@ let app = new Vue({
         search() {
             this.cityIds = this.citys[0].areaid;
             this.$http.get(api.web.weather.search(this.cityIds)).then(response => {
-                if (response.body.code == 200;) {
+                if (response.body.code === 200) {
                     this.weather = response.body.data;
                     var data = response.body.data;
                     var countyName = data.city;
@@ -189,17 +189,17 @@ let app = new Vue({
             })
         },
 
-        remoteMethod(query) {
+        remoteMethod: function (query) {
             if (query !== '') {
                 setTimeout(() => {
-                    this.citys = this.cityData.filter(item => {
-                        if (item.countyname.indexOf(query) > -1;) {
-                            return item.areaid;
-                        }
-            })
-            },
-                200;
-            )
+                        this.citys = this.cityData.filter(item => {
+                            if (item.countyname.indexOf(query) > -1)
+                            {
+                                return item.areaid;
+                            }
+                        })
+                    },
+                    200)
             } else {
                 this.citys = [];
             }

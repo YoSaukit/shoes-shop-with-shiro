@@ -1,15 +1,19 @@
 package cn.tycoding.item.controller;
 
+import cn.tycoding.common.annotation.Log;
 import cn.tycoding.common.controller.BaseController;
 import cn.tycoding.common.dto.QueryPage;
 import cn.tycoding.common.dto.ResponseCode;
+import cn.tycoding.common.exception.GlobalException;
 import cn.tycoding.common.utils.ObjectUtil;
 import cn.tycoding.common.utils.TimeUtil;
 import cn.tycoding.item.service.ItemService;
 import cn.tycoding.system.entity.Item;
+import cn.tycoding.system.entity.UserWithRole;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.Api;
 import org.apache.ibatis.annotations.Param;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,19 +32,26 @@ import java.util.Map;
 public class ItemController extends BaseController {
     @Autowired
     private ItemService itemService;
-
+    @Log("商品列表")
     @PostMapping("/list")
     public ResponseCode getItemByFields(QueryPage queryPage, Item item) {
-//        String title = ObjectUtil.castString(param.get("title"));
-//        String type = ObjectUtil.castString(param.get("type"));
-//        Date startTime = ObjectUtil.castDate(param.get("startTime").toString());
-//        Date endTime = ObjectUtil.castDate(param.get("endTime").toString());
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        QueryPage queryPage = objectMapper.convertValue(param.get("queryPage"),QueryPage.class );
-
-//        return ResponseCode.success(super.selectByPageNumSize(queryPage,()->itemService.getItemByFields(title,type,startTime,endTime)));
         return ResponseCode.success(super.selectByPageNumSize(queryPage,()->itemService.getItemByFields(item)));
-
+    }
+    @Log("添加商品")
+    @PostMapping("/add")
+    @RequiresPermissions("shop:add")
+    public ResponseCode add(@RequestBody Item item) {
+        try {
+            itemService.add(item);
+            return ResponseCode.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new GlobalException(e.getMessage());
+        }
+    }
+    @GetMapping("findById")
+    public ResponseCode findById(Long id) {
+        return ResponseCode.success(userService.findById(id));
     }
 
 }

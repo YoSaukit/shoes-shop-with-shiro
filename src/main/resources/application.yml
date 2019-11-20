@@ -80,6 +80,7 @@ pagehelper:
 logging:
   level:
     cn.tycoding.system.mapper: DEBUG
+    cn.tycoding.item.mapper: DEBUG
 
 
 # 七牛云

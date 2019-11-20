@@ -13,6 +13,7 @@
     <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>
 
+
   <!--<select id="getItemByFields" resultType="cn.tycoding.system.entity.Item">-->
     <!--select *-->
     <!--from tb_item-->

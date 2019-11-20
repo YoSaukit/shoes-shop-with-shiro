@@ -1,12 +1,12 @@
 let app = new Vue({
     el: '#app',
     data() {
-        var validateName = (rule, value, callback) =;> {
+        var validateName = (rule, value, callback) => {
             if (!value) {
                 return callback(new Error('名称不能为空'))
             }
             this.$http.get(api.system.user.checkName(value, this.form.id)).then(response => {
-                if (response.body.code != 200) {
+                if (response.body.code !== 200) {
                     callback(new Error(response.body.msg))
                 } else {
                     callback();
@@ -92,7 +92,7 @@ let app = new Vue({
         init() {
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
-                if (response.body.code == 200;) {
+                if (response.body.code === 200) {
                     this.tree = response.body.data;
                 }
             })
@@ -173,7 +173,7 @@ let app = new Vue({
             this.dialogVisible = true; //打开模态框
         },
         clearForm() {
-            if (this.$refs.form != undefined) {
+            if (this.$refs.form !== undefined) {
                 this.$refs.form.resetFields(); //重置表单校验状态
             }
             this.form.username = '';
@@ -195,9 +195,9 @@ let app = new Vue({
                 if (valid) {
                     this.form.deptId = this.form.deptId[0];
                     this.dialogVisible = false;
-                    if (this.form.id == null || this.form.id == 0) {
+                    if (this.form.id == null || this.form.id === 0) {
                         this.$http.post(api.system.user.add, JSON.stringify(this.form)).then(response => {
-                            if (response.body.code == 200;) {
+                            if (response.body.code === 200) {
                                 this._notify(response.body.msg, 'success')
                             } else {
                                 this._notify(response.body.msg, 'error')
@@ -208,8 +208,8 @@ let app = new Vue({
                     } else {
                         //修改
                         this.$http.post(api.system.user.update, JSON.stringify(this.form)).then(response => {
-                            if (response.body.code == 200;) {
-                                if (this.form.id == this.info.id) {
+                            if (response.body.code === 200) {
+                                if (this.form.id === this.info.id) {
                                     window.location.href = "/logout"
                                 }
                                 this._notify(response.body.msg, 'success')
@@ -233,7 +233,7 @@ let app = new Vue({
                 this.form.deptId = [data.id];
                 this.$refs.tree.setCheckedNodes([data.id])
             } else {
-                if (this.$refs.tree.getCheckedKeys().length == 0) {
+                if (this.$refs.tree.getCheckedKeys().length === 0) {
                     this.form.deptId = [];
                 }
             }
@@ -249,7 +249,7 @@ let app = new Vue({
 
         //触发删除按钮
         handleDelete(id) {
-            if (id != undefined) {
+            if (id !== undefined) {
                 this.selectIds = [id];
             }
             this.$confirm('你确定永久删除此账户？, 是否继续?', '提示', {
@@ -258,7 +258,7 @@ let app = new Vue({
                 type: 'warning'
             }).then(() => {
                 this.$http.post(api.system.user.delete, JSON.stringify(this.selectIds)).then(response => {
-                    if (response.body.code == 200;) {
+                    if (response.body.code === 200) {
                         this._notify('删除成功', 'success')
                     } else {
                         this._notify(response.body.msg, 'error')
@@ -286,7 +286,7 @@ let app = new Vue({
         //文件上传成功的钩子函数
         handleAvatarSuccess(res, file, fileList) {
             this._notify('图片上传成功', 'success');
-            if (res.code == 200) {
+            if (res.code === 200) {
                 this.form.avatar = res.data.url;
                 this.avatarDialog = false;
             }

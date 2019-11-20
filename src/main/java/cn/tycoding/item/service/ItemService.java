@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface ItemService extends BaseService<Item> {
     List<Item> getItemByFields(Item item);
+
+    void add(Item item);
+
+    Item findById(int id);
 }

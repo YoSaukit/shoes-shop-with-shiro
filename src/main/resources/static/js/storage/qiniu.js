@@ -51,7 +51,7 @@ let app = new Vue({
         init() {
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
-                if (response.body.code == 200;) {
+                if (response.body.code === 200) {
                     this.tree = response.body.data;
                 }
             })
@@ -78,7 +78,7 @@ let app = new Vue({
 
         //查询
         handleFind(name) {
-            if (name == '') {
+            if (name === '') {
                 this.search();
                 return;
             }
@@ -101,7 +101,7 @@ let app = new Vue({
                 center: true
             }).then(() => {
                 this.$http.get(api.storage.qiniu.deleteOne(name)).then(response => {
-                    if (response.code != 200;) {
+                    if (response.code !== 200) {
                         this._notify(response.body.msg, 'success')
                     } else {
                         this._notify(response.body.msg, 'error')
@@ -125,7 +125,7 @@ let app = new Vue({
             formData.append('file', item.file);
             this.$http.post(api.storage.qiniu.upload, formData).then(response => {
                 this.createDialogVisible = false;
-                if (response.body.code == 200) {
+                if (response.body.code === 200) {
                     this._notify(response.body.msg, 'success')
                 } else {
                     this._notify(response.body.msg, 'error')
@@ -147,7 +147,7 @@ let app = new Vue({
                     console.log(this.dataForm);
                     this.$http.get(api.storage.qiniu.updateOne(this.dataForm.oldname, this.dataForm.newname)).then(response => {
                         this.updateDialogVisible = false;
-                        if (response.body.code == 200) {
+                        if (response.body.code === 200) {
                             this._notify(response.body.msg, 'success')
                         } else {
                             this._notify(response.body.msg, 'error')
@@ -155,7 +155,7 @@ let app = new Vue({
                         this.search();
                     })
                 }
-            };)
+            })
         },
         //文件上传前的前的钩子函数
         beforeUpload(file) {

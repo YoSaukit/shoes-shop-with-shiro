@@ -56,7 +56,7 @@ let app = new Vue({
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
                 let $this = response.body;
-                if ($this.code == 200) {
+                if ($this.code === 200) {
                     this.tree = $this.data;
                 }
             })
@@ -66,7 +66,7 @@ let app = new Vue({
             })
             var $this = this;
             $this.$http.get(api.monitor.redis.memory).then(response => {
-                if (response.body.code == 200;) {
+                if (response.body.code === 200) {
                     Highcharts.chart('memory', {
                         chart: {
                             type: 'spline',
@@ -81,7 +81,7 @@ let app = new Vue({
                                             var x = data.create_time,
                                                 y = data.memory / 1024;
                                             series.addPoint([ x, y ], true, true);
-                                            if (response.body.code == 200) {
+                                            if (response.body.code === 200) {
                                             } else {
                                                 this._notify(response.body.msg, 'error');
                                             }
@@ -140,7 +140,7 @@ let app = new Vue({
             })
 
             this.$http.get(api.monitor.redis.dbsize).then(response => {
-                if (response.body.code == 200;) {
+                if (response.body.code === 200) {
                     Highcharts.chart('dbsize', {
                         chart: {
                             type: "spline",
@@ -151,7 +151,7 @@ let app = new Vue({
                                     var series = this.series[0];
                                     setInterval(function() {
                                         $this.$http.get(api.monitor.redis.dbsize).then(response => {
-                                            if (response.body.code == 200;) {
+                                            if (response.body.code === 200) {
                                                 var data = response.body.data;
                                                 var x = data.create_time, y = data.dbsize;
                                                 series.addPoint([x, y], true, true);

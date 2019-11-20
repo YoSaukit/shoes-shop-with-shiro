@@ -51,12 +51,12 @@ let app = new Vue({
             this.$refs[form].validate(valid => {
                 if (valid) {
                     this.$http.post(api.login, this.form).then(response => {
-                        if (response.body.code == 200) {
+                        if (response.body.code === 200) {
                         //获取UserInfo
                         this.$http.get(api.info).then(result => {
                             //将UserInfo数据存储到浏览器的localStorage中
                             window.localStorage.setItem("info", JSON.stringify(result.body.data));
-                        if (result.body.code == 200 && window.localStorage.getItem("info") != null) {
+                        if (result.body.code === 200 && window.localStorage.getItem("info") != null) {
                             window.location.href = "/";
                         } else {
                             this.getGifCode();

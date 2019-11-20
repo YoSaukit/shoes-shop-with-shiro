@@ -2,12 +2,12 @@
 let app = new Vue({
     el: '#app',
     data() {
-        var validateName = (rule, value, callback) =;> {
+        var validateName = (rule, value, callback) => {
             if (!value) {
                 return callback(new Error('名称不能为空'))
             }
             this.$http.get(api.system.dept.checkName(value, this.form.id)).then(response => {
-                if (response.body.code != 200;) {
+                if (response.body.code !== 200) {
                     callback(new Error(response.body.msg))
                 } else {
                     callback();
@@ -83,7 +83,7 @@ let app = new Vue({
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
                 let $this = response.body;
-                if ($this.code == 200) {
+                if ($this.code === 200) {
                     this.tree = $this.data;
                 }
             })
@@ -108,7 +108,7 @@ let app = new Vue({
             this.loading = true;
             this.$http.post(api.system.dept.list(pageCode, pageSize), this.searchEntity).then(response => {
                 let $this = response.body;
-                if ($this.code == 200) {
+                if ($this.code === 200) {
                     this.list = $this.data.rows;
                     this.pageConf.totalPage = $this.data.total;
                 }
@@ -150,7 +150,7 @@ let app = new Vue({
             this.dialogVisible = true;
         },
         clearForm() {
-            if (this.$refs.form != undefined) {
+            if (this.$refs.form !== undefined) {
                 this.$refs.form.resetFields();
             }
             this.form.id = '';
@@ -163,10 +163,10 @@ let app = new Vue({
                 if (valid) {
                     this.dialogVisible = false;
                     this.form.parentId = this.form.parentId[0];
-                    if (this.form.id == null || this.form.id == 0) {
+                    if (this.form.id == null || this.form.id === 0) {
                         //添加
                         this.$http.post(api.system.dept.add, JSON.stringify(this.form)).then(response => {
-                            if (response.body.code == 200;) {
+                            if (response.body.code === 200) {
                                 this._notify(response.body.msg, 'success')
                             } else {
                                 this._notify(response.body.msg, 'error')
@@ -178,7 +178,7 @@ let app = new Vue({
                     } else {
                         //修改
                         this.$http.post(api.system.dept.update, JSON.stringify(this.form)).then(response => {
-                            if (response.body.code == 200;) {
+                            if (response.body.code === 200) {
                                 this._notify(response.body.msg, 'success')
                             } else {
                                 this._notify(response.body.msg, 'error')
@@ -200,7 +200,7 @@ let app = new Vue({
                 this.form.parentId = [data.id];
                 this.$refs.tree.setCheckedNodes([data.id])
             } else {
-                if (this.$refs.tree.getCheckedKeys().length == 0) {
+                if (this.$refs.tree.getCheckedKeys().length === 0) {
                     this.form.parentId = [];
                 }
             }
@@ -216,7 +216,7 @@ let app = new Vue({
 
         //触发删除按钮
         handleDelete(id) {
-            if (id != undefined) {
+            if (id !== undefined) {
                 this.selectIds = [id];
             }
             if (this.selectIds.length < 1) {
@@ -229,7 +229,7 @@ let app = new Vue({
                 type: 'warning'
             }).then(() => {
                 this.$http.post(api.system.dept.delete, JSON.stringify(this.selectIds)).then(response => {
-                    if (response.body.code == 200;) {
+                    if (response.body.code === 200) {
                         this._notify('删除成功', 'success')
                     } else {
                         this._notify(response.body.msg, 'error')
