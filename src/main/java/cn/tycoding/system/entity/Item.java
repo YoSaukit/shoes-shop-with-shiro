@@ -38,5 +38,17 @@ public class Item {
     private Date time;
 
     @Transient
-    private String filedTime;
+    private String timeField;
+
+    public Item(String type, String picture, String title, Double price, Date time, String timeField) {
+        this.type = type;
+        this.picture = picture;
+        this.title = title;
+        this.price = price;
+        this.time = time;
+        this.timeField = timeField;
+    }
+
+    public Item() {
+    }
 }

@@ -7,6 +7,7 @@ import cn.tycoding.common.dto.ResponseCode;
 import cn.tycoding.common.exception.GlobalException;
 import cn.tycoding.common.utils.ObjectUtil;
 import cn.tycoding.common.utils.TimeUtil;
+import cn.tycoding.item.controller.Model.ItemModel;
 import cn.tycoding.item.service.ItemService;
 import cn.tycoding.system.entity.Item;
 import cn.tycoding.system.entity.UserWithRole;
@@ -40,18 +41,30 @@ public class ItemController extends BaseController {
     @Log("添加商品")
     @PostMapping("/add")
     @RequiresPermissions("shop:add")
-    public ResponseCode add(@RequestBody Item item) {
+    public ResponseCode add(@RequestBody ItemModel itemModel) {
         try {
-            itemService.add(item);
-            return ResponseCode.success();
+            itemService.add(itemModel);
+            return ResponseCode.success("添加商品成功");
         } catch (Exception e) {
             e.printStackTrace();
             throw new GlobalException(e.getMessage());
         }
     }
-    @GetMapping("findById")
-    public ResponseCode findById(Long id) {
-        return ResponseCode.success(userService.findById(id));
+    @GetMapping("/findById")
+    public ResponseCode findById(int id) {
+        return ResponseCode.success(itemService.findById(id));
+    }
+    @Log("编辑商品")
+    @PostMapping("update")
+    @RequiresPermissions("shop:update")
+    public ResponseCode update(@RequestBody ItemModel itemModel) {
+        try {
+            itemService.update(itemModel);
+            return ResponseCode.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new GlobalException(e.getMessage());
+        }
     }
 
 }

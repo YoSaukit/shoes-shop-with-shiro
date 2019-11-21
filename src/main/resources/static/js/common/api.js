@@ -160,7 +160,14 @@ let api = {
             list(pageCode, pageSize) {
                 return '/item/shop/list?pageCode=' + pageCode + '&pageSize=' + pageSize;
             },
-        }
+            findById(id) {
+                return '/item/shop/findById?id=' + id;
+            },
+            add: '/item/shop/add',
+            update: '/item/shop/update',
+            delete: '/item/shop/delete',
+        },
+
     }
 
 };

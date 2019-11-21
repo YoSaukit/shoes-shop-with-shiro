@@ -1,12 +1,39 @@
 let app = new Vue({
     el: '#app',
-    data: {
+    data() {
+        var validateName = (rule, value, callback) => {
+            if (!value) {
+                return callback(new Error('名称不能为空'))
+            }
+            this.$http.get(api.system.user.checkName(value, this.form.id)).then(response => {
+                if (response.body.code !== 200) {
+                callback(new Error(response.body.msg))
+            } else {
+                callback();
+            }
+        })
+    }
+    return {
         defaultActive: '商品列表',
         info: JSON.parse(window.localStorage.getItem("info")), //从localStorage中获取登录用户数据
         tree: '', //菜单Tree
         list: [], //用户列表数据
         searchEntity: {}, //查询实体类
         loading: true,
+        //模态框状态标识
+        dialogVisible: false,
+        dialogTitle: '',
+        avatarDialog: false,
+        avatarList: [],
+        form:{
+            id: '',
+            title: '',
+            type: '',
+            picture: '',
+            price: null,
+            color: '',
+            size: '',
+        },
         //分页选项
         pageConf: {
             //设置一些初始值(会被覆盖)
@@ -16,14 +43,17 @@ let app = new Vue({
             pageOption: [10, 10, 20], //分页选项
         },
         selectIds: [], //Table选中行ID
-
+        checkForm: {
+            username: [{ validator: validateName, trigger: 'blur' }]
+        },
+        loading: true,
         mobileStatus: false, //是否是移动端
         sidebarStatus: true, //侧边栏状态，true：打开，false：关闭
         sidebarFlag: ' openSidebar ', //侧边栏标志
-        dialogVisible: false,
         newpass: {
             password: ''
         }
+    }
     },
     created() {
         window.onload = function () {
@@ -52,23 +82,23 @@ let app = new Vue({
         init() {
             //获取Tree
             this.$http.get(api.common.tree(this.info.username)).then(response => {
-                if (response.body.code == 200) {
+                if (response.body.code === 200) {
                 this.tree = response.body.data;
                 }
             })
         },
         //修改密码
-        updatePass(form) {
-            this.$refs[form].validate((valid) => {
-                if (valid) {
-                    this.$http.get(api.common.updatePassword(this.newpass.password)).then(response => {
-                        window.location.href = '/logout';
-                })
-                }
-            })
-        },
+        // updatePass(form) {
+        //     this.$refs[form].validate((valid) => {
+        //         if (valid) {
+        //             this.$http.get(api.common.updatePassword(this.newpass.password)).then(response => {
+        //                 window.location.href = '/logout';
+        //         })
+        //         }
+        //     })
+        // },
 
-        //获取用户列表
+        //获取商品列表
         search(pageCode, pageSize) {
             this.loading = true;
             if (this.searchEntity.timeField != null) {
@@ -97,6 +127,67 @@ let app = new Vue({
             this.dialogVisible = false; //关闭模态框
         },
 
+        //触发保存按钮：添加、更新
+        handleSave(id) {
+            this.clearForm();
+
+            if (id == null) {
+                this.dialogTitle = '新增商品'
+            } else {
+                this.dialogTitle = '修改商品';
+                this.$http.get(api.item.shop.findById(id)).then(response => {
+                    let $this = response.body;
+                this.form = $this.data;
+            })
+            }
+            this.dialogVisible = true;
+        },
+        clearForm() {
+            if (this.$refs.form !== undefined) {
+                this.$refs.form.resetFields();
+            }
+            this.form.id = null,
+            this.form.title = '';
+            this.form.type = '';
+            this.form.picture = '';
+            this.form.price = null;
+            this.form.color = '';
+            this.form.size = '';
+
+        },
+        //保存
+        save(form) {
+            this.$refs[form].validate((valid) => {
+                if (valid) {
+                    this.dialogVisible = false;
+                    if (this.form.id == null || this.form.id === 0) {
+                        //添加
+                        this.$http.post(api.item.shop.add, JSON.stringify(this.form)).then(response => {
+                            if (response.body.code === 200) {
+                            this._notify(response.body.msg, 'success')
+                        } else {
+                            this._notify(response.body.msg, 'error')
+                        }
+                        this.clearForm();
+                        this.search(this.pageConf.pageCode, this.pageConf.pageSize)
+                    })
+                    } else {
+                        //修改
+                        this.$http.post(api.item.shop.update, JSON.stringify(this.form)).then(response => {
+                            if (response.body.code === 200) {
+                            this._notify(response.body.msg, 'success')
+                        } else {
+                            this._notify(response.body.msg, 'error')
+                        }
+                        this.clearForm();
+                        this.search(this.pageConf.pageCode, this.pageConf.pageSize)
+                    })
+                    }
+                } else {
+                    return false;
+        }
+        })
+        },
         //Table选中触发事件
         selectChange(val) {
             this.selectIds = [];
@@ -115,7 +206,7 @@ let app = new Vue({
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                this.$http.post(api.monitor.loginlog.delete, JSON.stringify(this.selectIds)).then(response => {
+                this.$http.post(api.item.shop.delete, JSON.stringify(this.selectIds)).then(response => {
                 if (response.body.code === 200) {
                 this._notify('删除成功', 'success')
             } else {
