@@ -9,4 +9,12 @@
     <result column="item_id" jdbcType="INTEGER" property="itemId" />
     <result column="size" jdbcType="VARCHAR" property="size" />
   </resultMap>
+  <select id="selectByItemId" resultType="java.lang.String">
+    select distinct `size`
+    from td_item_size
+    where item_id = #{id}
+  </select>
+  <delete id="deleteByIndex" parameterType="cn.tycoding.system.entity.ItemSize">
+    delete from tb_item_size where item_id = #{id} and `size` = #{size}
+  </delete>
 </mapper>

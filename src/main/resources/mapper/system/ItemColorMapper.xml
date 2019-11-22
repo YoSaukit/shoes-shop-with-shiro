@@ -9,4 +9,12 @@
     <result column="item_id" jdbcType="INTEGER" property="itemId" />
     <result column="color" jdbcType="VARCHAR" property="color" />
   </resultMap>
+  <select id="selectByItemId" resultType="java.lang.String">
+    select distinct color
+    from td_item_color
+    where item_id = #{id}
+  </select>
+  <delete id="deleteByIndex" parameterType="cn.tycoding.system.entity.ItemColor">
+    delete from tb_item_color where item_id = #{id} and color = #{color}
+  </delete>
 </mapper>

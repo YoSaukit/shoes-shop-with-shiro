@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -110,16 +111,27 @@ public class ItemServiceImpl extends BaseServiceImpl<Item> implements ItemServic
         BeanUtils.copyProperties(itemModel,item);
         this.updateNotNull(item);
         String[] colorList = itemModel.getColor().split(",");
+        List<String> newColors = Arrays.asList(colorList);
         String[] sizeList = itemModel.getSize().split(",");
-        for (String color :
-                colorList) {
-            ItemColor itemColor = new ItemColor(itemModel.getId(), color);
-            itemColorMapper.updateByExampleSelective(itemColor);
+        List<String> newSizes = Arrays.asList(sizeList);
+        List<String> oldColors = itemColorMapper.selectByItemId(itemModel.getId());
+        List<String> oldSizes = itemSizeMapper.selectByItemId(itemModel.getId());
+        for (String color : oldColors) {
+            if (!newColors.contains(color))
+                itemColorMapper.deleteByIndex(new ItemColor(itemModel.getId(),color));
         }
-        for (String size :
-                sizeList) {
-            ItemSize itemSize = new ItemSize(itemModel.getId(), size);
-            itemSizeMapper.insert(itemSize);
+        for (String color : colorList) {
+            if (!oldColors.contains(color))
+                itemColorMapper.insert(new ItemColor(itemModel.getId(),color));
         }
+        for (String size : oldSizes) {
+            if (!newSizes.contains(size))
+                itemSizeMapper.deleteByIndex(new ItemSize(itemModel.getId(),size));
+        }
+        for (String size : sizeList) {
+            if (!oldSizes.contains(size))
+                itemSizeMapper.insert(new ItemSize(itemModel.getId(),size));
+        }
+
     }
 }
