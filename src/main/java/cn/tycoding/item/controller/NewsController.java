@@ -21,17 +21,17 @@ public class NewsController extends BaseController {
     @Autowired
     private NewsService newsService;
     @Log("商品列表")
-    @PostMapping("/list")
-    public ResponseCode getNewsByFields(QueryPage queryPage, News news) {
-        return ResponseCode.success(super.selectByPageNumSize(queryPage,()->newsService.getNewsByFields(news)));
+    @GetMapping("/list")
+    public ResponseCode getNews(News news) {
+        return ResponseCode.success(newsService.getNews(news));
     }
-//    @GetMapping("/findById")
-//    public ResponseCode findById(int id) {
-//        return ResponseCode.success(newsService.findById(id));
-//    }
+    @GetMapping("/findById")
+    public ResponseCode findById(int id) {
+        return ResponseCode.success(newsService.findById(id));
+    }
     @Log("添加商品")
     @PostMapping("/add")
-    @RequiresPermissions("shop:add")
+    @RequiresPermissions("news:add")
     public ResponseCode add(@RequestBody News news) {
         try {
             newsService.add(news);
@@ -46,7 +46,7 @@ public class NewsController extends BaseController {
     @RequiresPermissions("news:update")
     public ResponseCode update(@RequestBody News news) {
         try {
-//            itemService.update(itemModel);
+            newsService.update(news);
             return ResponseCode.success();
         } catch (Exception e) {
             e.printStackTrace();

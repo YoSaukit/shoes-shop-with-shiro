@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tycoding.item.mapper.system.OrderMapper">
+  <resultMap id="BaseResultMap" type="cn.tycoding.system.entity.Order">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="nums" jdbcType="INTEGER" property="nums" />
+    <result column="sum" jdbcType="INTEGER" property="sum" />
+    <result column="pay_mode" jdbcType="INTEGER" property="payMode" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="member_id" jdbcType="INTEGER" property="memberId" />
+  </resultMap>
+</mapper>

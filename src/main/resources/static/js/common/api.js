@@ -168,6 +168,17 @@ let api = {
             delete: '/item/shop/delete',
         },
 
+    },
+    shop: {
+        news: {
+            list: '/shop/news/list',
+            findById(id){
+                return '/shop/news/findById?id=' + id;
+            },
+            add: '/shop/news/add',
+            update: '/shop/news/update',
+            delete: '/shop/news/delete',
+        }
     }
 
 };

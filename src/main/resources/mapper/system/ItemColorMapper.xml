@@ -11,7 +11,7 @@
   </resultMap>
   <select id="selectByItemId" resultType="java.lang.String">
     select distinct color
-    from td_item_color
+    from tb_item_color
     where item_id = #{id}
   </select>
   <delete id="deleteByIndex" parameterType="cn.tycoding.system.entity.ItemColor">

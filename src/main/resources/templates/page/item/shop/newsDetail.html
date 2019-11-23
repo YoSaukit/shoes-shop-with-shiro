@@ -1,0 +1,15 @@
+<el-dialog :title="dialogTitle" :visible.sync="dialogNewsVisible" width="50%" :before-close="handleClose" :close-on-press-escape="false" :close-on-click-modal="false">
+    <template>
+        <div class="newsDetail">
+            <div class="title"><h1>{{news.title}}</h1></div>
+            <div class="time">{{news.time}}</div>
+            <div class="content">{{news.content}}</div>
+            <div>
+                <img :src="news.picture" style="width: 230px; height: 320px;" alt="新闻图"/>
+            </div>
+        </div>
+    </template>
+    <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogNewsVisible = false">关 闭</el-button>
+    </span>
+</el-dialog>

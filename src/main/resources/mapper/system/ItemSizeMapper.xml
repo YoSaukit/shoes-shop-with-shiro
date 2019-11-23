@@ -11,7 +11,7 @@
   </resultMap>
   <select id="selectByItemId" resultType="java.lang.String">
     select distinct `size`
-    from td_item_size
+    from tb_item_size
     where item_id = #{id}
   </select>
   <delete id="deleteByIndex" parameterType="cn.tycoding.system.entity.ItemSize">

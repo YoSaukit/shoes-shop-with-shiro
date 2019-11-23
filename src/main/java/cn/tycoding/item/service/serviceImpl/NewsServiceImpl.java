@@ -20,7 +20,7 @@ public class NewsServiceImpl extends BaseServiceImpl<News> implements NewsServic
     @Autowired
     private NewsMapper newsMapper;
     @Override
-    public List<News> getNewsByFields(News news) {
+    public List<News> getNews(News news) {
         Example example = new Example(News.class);
         Example.Criteria criteria = example.createCriteria();
         if (StringUtils.isNotBlank(news.getTitle())){
@@ -32,12 +32,17 @@ public class NewsServiceImpl extends BaseServiceImpl<News> implements NewsServic
 
     @Override
     public void add(News news) {
-        this.add(news);
+        this.save(news);
     }
 
     @Override
     public void update(News news) {
         this.updateNotNull(news);
+    }
+
+    @Override
+    public News findById(int id) {
+        return newsMapper.selectByPrimaryKey(id);
     }
 
 

@@ -14,7 +14,7 @@ spring:
       #mysql驱动
       driver-class-name: com.mysql.cj.jdbc.Driver
       #基本属性
-      url: jdbc:mysql://127.0.0.1:3306/shoes?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+      url: jdbc:mysql://127.0.0.1:3306/shoes?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2b8&useSSL=false
       username: root
       password: root
       #配置初始化大小/最小/最大
@@ -25,7 +25,6 @@ spring:
       max-wait: 60000
       #间隔多久进行一次检测，检测需要关闭的空闲连接
       time-between-eviction-runs-millis: 60000
-
   #devtools插件
   devtools:
     livereload:
@@ -49,6 +48,8 @@ spring:
       enabled: true
       max-file-size: 10MB
       max-request-size: 100MB
+  jackson:
+    time-zone: Asia/Shanghai
 
 
 redis:

@@ -6,9 +6,12 @@ import cn.tycoding.system.entity.News;
 import java.util.List;
 
 public interface NewsService extends BaseService<News> {
-    List<News> getNewsByFields(News news);
+    List<News> getNews(News news);
 
     void add(News news);
 
     void update(News news);
+
+    News findById(int id);
 }
+

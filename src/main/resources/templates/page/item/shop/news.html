@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>品牌新闻</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <div th:replace="common/css"></div>
+    <link rel="stylesheet" th:href="@{/css/movie.css}"/>
+</head>
+<body>
+<!-- vue入口 -->
+<div id="app">
+    <div :class="'app-wrapper' + sidebarFlag">
+
+        <!-- aside -->
+        <div th:replace="common/side"></div>
+
+        <!-- container -->
+        <el-container class="main-container">
+            <!-- header -->
+            <div style="background-color: rgb(84, 92, 100);" th:replace="common/header"></div>
+
+            <!-- main -->
+            <el-main class="app-main">
+                <el-card>
+                    <el-row th:align="right">
+                        <el-button type="primary" plain size="small" @click="handleSave()" icon="el-icon-plus"></el-button>
+                    </el-row>
+                    <br/>
+                    <el-row :gutter="20" v-loading="loading">
+                        <el-col :span="6" v-for="(news, index) in newsList" :key="index" style="padding: 1rem">
+                            <el-card class="news-card" style="width: 270px">
+                                <img :src="news.picture" style="width: 230px; height: 320px;" alt="新闻图"/>
+                                <div class="news-desc">
+                                    <div class="title" :title="news.title"><p>{{news.title}}</p></div>
+                                    <p style="color: #aaa;margin-bottom: 10px;height: 22px;">{{news.time}}</p>
+                                </div>
+                                <div>
+                                    <el-button @click="detail(news.id)" type="text" >查看</el-button>
+                                    <el-button @click="handleSave(news.id)" type="text">编辑</el-button>
+                                </div>
+                            </el-card>
+                        </el-col>
+                    </el-row>
+                </el-card>
+            </el-main>
+        </el-container>
+    </div>
+    <div th:replace="page/item/shop/newsSave"></div>
+    <div th:replace="page/item/shop/newsDetail"></div>
+</div>
+<div th:replace="common/js"></div>
+<script type="text/javascript" th:src="@{/js/item/news.js}"></script>
+</body>
+</html>

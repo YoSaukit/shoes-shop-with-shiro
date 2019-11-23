@@ -133,4 +133,10 @@ public class RouterController {
     @GetMapping("/item/shop")
     @RequiresPermissions("shop:list")
     public String list(){return "page/item/shop/index";}
+    /**
+     * 品牌新闻
+     */
+    @GetMapping("/shop/news")
+    @RequiresPermissions("news:list")
+    public String news(){return "page/item/shop/news";}
 }
