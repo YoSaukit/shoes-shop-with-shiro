@@ -53,7 +53,7 @@
                     </el-row>
                     <br/>
                     <!-- 列表 -->
-                    <el-table ref="table" @selection-change="selectChange" :data="list" v-loading="loading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" stripe size="mini" border tooltip-effect="dark" style="width: 100%">
+                    <el-table ref="table" @selection-change="selectChange" @row-click="handleRowChange" :data="list" v-loading="loading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" stripe size="mini" border tooltip-effect="dark" style="width: 100%">
                         <el-table-column type="selection" width="40" align="center"></el-table-column>
                         <el-table-column prop="type" label="类型" width="150" align="center"></el-table-column>
                         <el-table-column prop="title" label="名称" width="180" align="center"></el-table-column>
@@ -90,6 +90,7 @@
 
     <!-- 添加-模态框 -->
     <div th:replace="page/item/shop/save"></div>
+    <div th:replace="page/item/shop/itemDetail"></div>
 </div>
 <div th:replace="common/js"></div>
 <script type="text/javascript" th:src="@{/js/item/shop.js}"></script>

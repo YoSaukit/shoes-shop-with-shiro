@@ -26,6 +26,8 @@ let app = new Vue({
         dialogSaveVisible: false,
         avatarDialog: false,
         avatarList: [],
+        dialogItemVisible: false,
+        dialogItemTitle: '',
         form:{
             id: '',
             title: '',
@@ -35,6 +37,25 @@ let app = new Vue({
             color: '',
             size: '',
         },
+        item: {
+            id:'',
+            title: '',
+            type: '',
+            picture: '',
+            price: null,
+            colors: [],
+            sizes: [],
+        },
+        size:'',
+        color:'',
+        skuPop1:{
+            selectSize:'',
+        },
+        skuPop2:{
+            selectColor:'',
+        },
+        sel: [],
+
         //分页选项
         pageConf: {
             //设置一些初始值(会被覆盖)
@@ -154,6 +175,34 @@ let app = new Vue({
             this.form.price = null;
             this.form.color = '';
             this.form.size = '';
+
+        },
+        handleRowChange(row){
+            this.dialogItemTitle = '商品详情';
+            if (row.id !== null){
+                this.$http.get(api.item.shop.findById(row.id)).then(response => {
+                    let $this = response.body;
+                    this.item.title = $this.data.title;
+                    this.item.type = $this.data.type;
+                    this.item.picture = $this.data.picture;
+                    this.item.price = $this.data.price;
+                    this.item.colors = ($this.data.color||"").split(",");
+                    this.item.sizes = ($this.data.size||"").split(",");
+            })
+            }
+            this.dialogItemVisible = true;
+        },
+        selectSize(size){
+            this.size=size;
+
+        },
+        selectColor(color){
+
+        },
+        addToCarts(){
+
+        },
+        settlement(){
 
         },
         //保存
