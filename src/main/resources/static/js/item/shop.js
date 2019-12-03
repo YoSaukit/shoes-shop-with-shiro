@@ -38,7 +38,7 @@ let app = new Vue({
             size: '',
         },
         item: {
-            id:'',
+            id:null,
             title: '',
             type: '',
             picture: '',
@@ -46,15 +46,8 @@ let app = new Vue({
             colors: [],
             sizes: [],
         },
-        size:'',
-        color:'',
-        skuPop1:{
-            selectSize:'',
-        },
-        skuPop2:{
-            selectColor:'',
-        },
-        sel: [],
+        selectedSize: '',
+        selectedColor: '',
 
         //分页选项
         pageConf: {
@@ -182,6 +175,7 @@ let app = new Vue({
             if (row.id !== null){
                 this.$http.get(api.item.shop.findById(row.id)).then(response => {
                     let $this = response.body;
+                    this.item.id = $this.data.id;
                     this.item.title = $this.data.title;
                     this.item.type = $this.data.type;
                     this.item.picture = $this.data.picture;
@@ -192,18 +186,15 @@ let app = new Vue({
             }
             this.dialogItemVisible = true;
         },
-        selectSize(size){
-            this.size=size;
-
-        },
-        selectColor(color){
-
-        },
         addToCarts(){
-
-        },
-        settlement(){
-
+            if (this.selectedSize===''||this.selectedColor==='')this._notify(response.body.msg,'error')
+            this.$http.post(api.order.cart.add, JSON.stringify({id:this.item.id,color:this.selectedColor,size:this.selectedSize,memberId:this.info.id})).then(response =>{
+                if(response.body.code===200){
+                this._notify(response.body.msg, 'success')
+            }else {
+                this._notify(response.body.msg, 'error')
+            }
+            })
         },
         //保存
         save(form) {

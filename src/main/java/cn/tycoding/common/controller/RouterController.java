@@ -139,4 +139,10 @@ public class RouterController {
     @GetMapping("/shop/news")
     @RequiresPermissions("news:list")
     public String news(){return "page/item/shop/news";}
+    /**
+     * 购物车
+     */
+    @GetMapping("/order/cart")
+    @RequiresPermissions("cart:list")
+    public String cart(){return "page/item/shop/cart";}
 }

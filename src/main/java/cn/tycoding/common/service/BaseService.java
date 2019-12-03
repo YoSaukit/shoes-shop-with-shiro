@@ -21,6 +21,8 @@ public interface BaseService<T> {
 
     void batchDelete(List<Long> ids, String property, Class<T> clazz);
 
+    void batchDeleteItem(List<Integer> ids, String property, Class<T> clazz);
+
     void updateAll(T entity);
 
     void updateNotNull(T entity);

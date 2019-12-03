@@ -44,7 +44,12 @@ public class BaseServiceImpl<T> implements BaseService<T> {
         example.createCriteria().andIn(property, ids);
         this.mapper.deleteByExample(example);
     }
-
+    @Override
+    public void batchDeleteItem(List<Integer> ids, String property, Class<T> clazz) {
+        Example example = new Example(clazz);
+        example.createCriteria().andIn(property, ids);
+        this.mapper.deleteByExample(example);
+    }
     @Override
     public void updateAll(T entity) {
         mapper.updateByPrimaryKey(entity);

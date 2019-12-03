@@ -43,6 +43,7 @@ let app = new Vue({
                 phone: '',
                 sex: '',
                 description: '',
+                address: '',
                 roleIds: [],
             },
             qiniuUpload: api.system.user.qiniuUpload,
@@ -184,6 +185,7 @@ let app = new Vue({
             this.form.phone = '';
             this.form.sex = '';
             this.form.description = '';
+            this.form.address = '';
             this.form.status = null;
             this.form.roleIds = [];
             this.form.id = null;

@@ -41,6 +41,9 @@
         <el-form-item label="描述" label-width="120px">
             <el-input v-model="form.description"></el-input>
         </el-form-item>
+        <el-form-item label="收货地址" label-width="120px">
+            <el-input v-model="form.address"></el-input>
+        </el-form-item>
         <el-form-item v-model="form.avatar" label="头像" label-width="120px">
             <div class="avatar-uploader">
                 <div @click="handleEditAvatar" class="el-upload">

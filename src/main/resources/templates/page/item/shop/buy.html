@@ -1,0 +1,33 @@
+<el-dialog :title="确认订单" :visible.sync="dialogBuyVisible" width="50%" :before-close="handleClose" :close-on-press-escape="false" :close-on-click-modal="false">
+    <el-table ref="table" :data="orderList" v-loading="loading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" stripe size="mini" border tooltip-effect="dark" style="width: 100%">
+        <el-table-column prop="picture" label="商品预览图" width="80" align="center">
+            <template slot-scope="scope">
+                <img :src="scope.row.picture" width="80" height="80" align="center">
+            </template>
+        </el-table-column>
+        <el-table-column prop="title" label="名称" width="100" align="center"></el-table-column>
+        <el-table-column prop="color" label="颜色" width="50" align="center"></el-table-column>
+        <el-table-column prop="size" label="尺码" width="50" align="center"></el-table-column>
+        <el-table-column prop="price" label="价格" width="50" align="center"></el-table-column>
+        <el-table-column prop="discount" label="折后价格" width="50" align="center"></el-table-column>
+        <el-table-column prop="num" label="数量" width="50" align="center"></el-table-column>
+    </el-table>
+    <el-form ref="form" :model="form" :rules="checkForm">
+        <el-form-item prop="remark" label="添加备注" label-width="120px" >
+            <el-input v-model="form.remark"></el-input>
+        </el-form-item>
+        <el-form-item prop="address" label="修改地址" label-width="120px" required>
+            <el-input v-model="form.address"></el-input>
+        </el-form-item>
+    </el-form>
+    <div>
+        <el-select v-model="payMode" placeholder="请选择支付方式">
+            <el-option v-for="(mode,index) in options" :key="index" :value="mode.value" :label="mode.label">
+            </el-option>
+        </el-select>
+    </div>
+    <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogBuyVisible = false">取  消</el-button>
+        <el-button @click="commit()">确认订单</el-button>
+    </span>
+</el-dialog>

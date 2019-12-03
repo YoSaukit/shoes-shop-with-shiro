@@ -179,6 +179,17 @@ let api = {
             update: '/shop/news/update',
             delete: '/shop/news/delete',
         }
+    },
+    order: {
+        cart:{
+            list(pageCode, pageSize) {
+                return '/order/cart/list?pageCode=' + pageCode + '&pageSize=' + pageSize;
+            },
+            findByIds: '/order/cart/findByIds',
+            add: '/order/cart/add',
+            delete: '/order/cart/delete',
+            buy: '/order/cart/buy',
+        }
     }
 
 };
