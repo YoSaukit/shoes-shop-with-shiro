@@ -131,6 +131,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderTemp> implements Orde
         }
         return cartModelList;
     }
+
+    @Override
+    public List<Order> orderList(Integer memberId) {
+        return null;
+    }
+
     private boolean isMember(int memberId){
         Example example1 = new Example(UserRole.class);
         Example.Criteria criteria1 = example1.createCriteria();
@@ -142,5 +148,6 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderTemp> implements Orde
             return false;
         }
     }
+
 
 }

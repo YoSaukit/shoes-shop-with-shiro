@@ -45,6 +45,8 @@ public class Order {
 
     private String address;
 
+    private Integer deliver;
+
     public Order() {
     }
 

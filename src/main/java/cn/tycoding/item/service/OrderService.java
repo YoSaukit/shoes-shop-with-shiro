@@ -19,4 +19,6 @@ public interface OrderService extends BaseService<OrderTemp> {
     void buy(Map<String, Object> param);
 
     List<CartModel> findByIds(List<Integer> ids);
+
+    List<Order> orderList(Integer memberId);
 }
