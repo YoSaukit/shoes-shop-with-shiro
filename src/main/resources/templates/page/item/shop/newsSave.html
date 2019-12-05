@@ -4,7 +4,7 @@
             <el-input v-model="form.title"></el-input>
         </el-form-item>
         <el-form-item prop="content" label="新闻内容" label-width="120px">
-            <el-input v-model="form.content"></el-input>
+            <el-input type="textarea" :rows="8" placeholder="请输入内容" v-model="form.content" ></el-input>
         </el-form-item>
         <el-form-item prop="picture" label="新闻图片" label-width="120px">
             <el-input v-model="form.picture"></el-input>

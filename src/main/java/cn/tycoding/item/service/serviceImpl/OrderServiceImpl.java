@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -97,7 +99,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderTemp> implements Orde
                 nums+=cartModel.getNum();
                 sum+=cartModel.getPrice();
             }
-            Order order = new Order(nums,sum,payMode,remark,memberId,address);
+            Order order = new Order(generateOrderNo(),nums,sum,payMode,remark,memberId,address,0);
             orderMapper.insert(order);
             for (CartModel cartModel :
                     cartModelList) {
@@ -107,10 +109,24 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderTemp> implements Orde
                 //从购物车中删除
                 orderTempMapper.deleteByPrimaryKey(cartModel.getId());
             }
-
-
         }
-
+        //是否满800变成会员身份
+        Example example = new Example(Order.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andCondition("member_id=",memberId);
+        List<Order> orderList = orderMapper.selectByExample(example);
+        int total = 0;
+        for (Order order :
+                orderList) {
+            total += order.getSum();
+        }
+        if (total >= 800) {
+            UserRole ur = new UserRole(memberId,7);
+            Example ex = new Example(UserRole.class);
+            Example.Criteria cr = ex.createCriteria();
+            cr.andCondition("user_id=",memberId);
+            userRoleMapper.updateByExampleSelective(ur,ex);
+        }
     }
 
 
@@ -134,8 +150,54 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderTemp> implements Orde
 
     @Override
     public List<Order> orderList(Integer memberId) {
-        return null;
+        Example userRoleExample = new Example(UserRole.class);
+        Example.Criteria urCriteria = userRoleExample.createCriteria();
+        urCriteria.andCondition("user_id=",memberId);
+        List<UserRole> userRoleList = userRoleMapper.selectByExample(userRoleExample);
+        List<Order> orderList;
+        if (userRoleList.get(0).getRoleId()==8){
+            orderList = orderMapper.selectAll();
+        }else{
+            Example example = new Example(Order.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andCondition("member_id=",memberId);
+            example.setOrderByClause("time desc");
+            orderList = orderMapper.selectByExample(example);
+        }
+        if (orderList==null||orderList.size()==0)return new ArrayList<>();
+        for (Order order :
+                orderList) {
+            Example example1 = new Example(OrderDetail.class);
+            Example.Criteria criteria1 = example1.createCriteria();
+            criteria1.andCondition("order_id=",order.getId());
+            List<OrderDetail> orderDetailList = orderDetailMapper.selectByExample(example1);
+            for (OrderDetail od :
+                    orderDetailList) {
+                Item item = itemMapper.selectByPrimaryKey(od.getItemId());
+                od.setPicture(item.getPicture());
+            }
+            order.setOrderDetails(orderDetailList);
+        }
+        return orderList;
     }
+
+    @Override
+    public OrderDetail orderDetail(Integer id) {
+        Example example = new Example(OrderDetail.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andCondition("order_id=",id);
+        return orderDetailMapper.selectByExample(example).get(0);
+    }
+
+    @Override
+    public void sent(List<Integer> ids) {
+        for (Integer id :
+                ids) {
+            Order order = new Order(id,1);
+            orderMapper.updateByPrimaryKeySelective(order);
+        }
+    }
+
 
     private boolean isMember(int memberId){
         Example example1 = new Example(UserRole.class);
@@ -148,6 +210,19 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderTemp> implements Orde
             return false;
         }
     }
+    private Integer generateOrderNo(){
+        //订单号10位,前6位时间
+        StringBuilder sb = new StringBuilder();
+        LocalDateTime now = LocalDateTime.now();
+        String nowDate = now.format(DateTimeFormatter.ISO_DATE).replace("-","").substring(2);
+        sb.append(nowDate);
+        int count = orderMapper.dailyCount(now.format(DateTimeFormatter.ISO_DATE)+"%");
+        StringBuilder stringBuilder = new StringBuilder(String.valueOf(count));
+        while(stringBuilder.length()<4){
+            stringBuilder.insert(0,"0");
+        }
+        return Integer.parseInt(sb.append(stringBuilder).toString());
 
+    }
 
 }

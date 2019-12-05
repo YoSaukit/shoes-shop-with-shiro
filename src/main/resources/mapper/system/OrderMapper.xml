@@ -13,4 +13,9 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="member_id" jdbcType="INTEGER" property="memberId" />
   </resultMap>
+  <select id="dailyCount" resultType="java.lang.Integer">
+    select count(*)
+    from tb_order
+    where `time` like #{date}
+  </select>
 </mapper>

@@ -23,6 +23,7 @@
             <!-- main -->
             <el-main class="app-main">
                 <el-card>
+                    <span>亲爱的{{info.roles}}-{{info.username}},您好！</span>
                     <el-row th:align="right">
                         <el-button type="primary" plain size="small" @click="handleSave()" icon="el-icon-plus"></el-button>
                     </el-row>

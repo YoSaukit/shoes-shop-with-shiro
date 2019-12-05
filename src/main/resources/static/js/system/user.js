@@ -197,7 +197,7 @@ let app = new Vue({
                 if (valid) {
                     this.form.deptId = this.form.deptId[0];
                     this.dialogVisible = false;
-                    if (this.form.id == null || this.form.id === 0) {
+                    if (this.form.id == null || this.form.id === 0 || this.form.id === '') {
                         this.$http.post(api.system.user.add, JSON.stringify(this.form)).then(response => {
                             if (response.body.code === 200) {
                                 this._notify(response.body.msg, 'success')

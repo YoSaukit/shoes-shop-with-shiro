@@ -45,7 +45,7 @@ let app = new Vue({
         sidebarFlag: ' openSidebar ', //侧边栏标志
         newpass: {
             password: ''
-        }
+        },
     }
     },
     created() {

@@ -77,9 +77,6 @@ public class OrderController extends BaseController {
         return ResponseCode.success(orderService.findByIds(ids));
     }
 
-    //订单列表
-    @PostMapping("/orderList")
-    public ResponseCode orderList(@RequestBody Map<String, Object>param){
-        return ResponseCode.success();
-    }
+
+
 }

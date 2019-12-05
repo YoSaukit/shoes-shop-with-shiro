@@ -188,7 +188,15 @@ let api = {
             findByIds: '/order/cart/findByIds',
             add: '/order/cart/add',
             delete: '/order/cart/delete',
-            buy: '/order/cart/buy',
+            buy: '/order/cart/buy'
+        }
+    },
+    orderDetail: {
+        order:{
+            list(pageCode, pageSize) {
+                return '/orderDetail/order/list?pageCode=' + pageCode + '&pageSize=' + pageSize;
+            },
+            sent: '/orderDetail/order/sent'
         }
     }
 

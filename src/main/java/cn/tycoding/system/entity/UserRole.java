@@ -21,4 +21,12 @@ public class UserRole implements Serializable {
 
     @Column(name = "role_id")
     private long roleId;
+
+    public UserRole() {
+    }
+
+    public UserRole(long userId, long roleId) {
+        this.userId = userId;
+        this.roleId = roleId;
+    }
 }

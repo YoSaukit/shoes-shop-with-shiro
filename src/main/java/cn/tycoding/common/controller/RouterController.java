@@ -145,4 +145,9 @@ public class RouterController {
     @GetMapping("/order/cart")
     @RequiresPermissions("cart:list")
     public String cart(){return "page/item/shop/cart";}
+
+    @GetMapping("/orderDetail/order")
+    @RequiresPermissions("order:list")
+    public String order(){return "page/item/shop/order";}
+
 }

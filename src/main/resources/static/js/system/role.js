@@ -162,7 +162,7 @@ let app = new Vue({
             this.$refs[form].validate((valid) => {
                 if (valid) {
                     this.dialogVisible = false;
-                    if (this.form.id == null || this.form.id === 0) {
+                    if (this.form.id == null || this.form.id === 0 ||this.form.id === '') {
                         //添加
                         this.$http.post(api.system.role.add, JSON.stringify(this.form)).then(response => {
                             if (response.body.code === 200) {

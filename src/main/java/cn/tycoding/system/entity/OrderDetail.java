@@ -41,6 +41,9 @@ public class OrderDetail {
     @Column(name = "dis_price")
     private Double disPrice;
 
+    @Transient
+    private String picture;
+
     public OrderDetail() {
     }
 
@@ -53,5 +56,17 @@ public class OrderDetail {
         this.num = num;
         this.discount = discount;
         this.disPrice = disPrice;
+    }
+
+    public OrderDetail(Integer orderId, Integer itemId, String color, String size, Double price, Integer num, Double discount, Double disPrice, String picture) {
+        this.orderId = orderId;
+        this.itemId = itemId;
+        this.color = color;
+        this.size = size;
+        this.price = price;
+        this.num = num;
+        this.discount = discount;
+        this.disPrice = disPrice;
+        this.picture = picture;
     }
 }
