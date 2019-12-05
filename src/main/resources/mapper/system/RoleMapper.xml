@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cn.tycoding.system.mapper.RoleMapper">
+<mapper namespace="cn.shoes.system.mapper.RoleMapper">
 
-    <select id="findUserRole" resultType="cn.tycoding.system.entity.Role">
+    <select id="findUserRole" resultType="cn.shoes.system.entity.Role">
         select r.*
         from tb_user u
                left join tb_user_role ur on (u.id = ur.user_id)
@@ -11,7 +11,7 @@
         where u.username = #{username}
     </select>
 
-    <select id="findById" resultType="cn.tycoding.system.entity.RoleWithMenu">
+    <select id="findById" resultType="cn.shoes.system.entity.RoleWithMenu">
         select r.*, rm.menu_id menuId
         from tb_role r
                left join tb_role_menu rm on (r.id = rm.role_id)

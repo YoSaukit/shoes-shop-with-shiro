@@ -226,7 +226,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.tycoding.ShiroApplication</mainClass>
+                    <mainClass>cn.shoes.ShiroApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>

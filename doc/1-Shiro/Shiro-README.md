@@ -76,8 +76,7 @@ public class ShiroConfig {
     @Bean
     public SimpleCookie simpleCookie() {
         SimpleCookie simpleCookie = new SimpleCookie();
-        simpleCookie.setName("cn.tycoding.id");
-        simpleCookie.setHttpOnly(true);
+        simpleCookie.setName(scn.shoes    simpleCookie.setHttpOnly(true);
         simpleCookie.setMaxAge(180000);
         return simpleCookie;
     }

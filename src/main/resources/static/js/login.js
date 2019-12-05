@@ -2,17 +2,17 @@ let app = new Vue({
     el: '#app',
     data: {
         form: {
-            username: 'tycoding',
+            username: 'shoes',
             password: '123456',
             remember: false,
             code: '',
         },
         img: {
-            normal: 'http://cdn.tycoding.cn/normal.0447fe9.png',
-            blindfold: 'http://cdn.tycoding.cn/blindfold.58ce423.png',
-            greeting: 'http://cdn.tycoding.cn/greeting.1415c1c.png'
+            normal: 'http://cdn.shoes.cn/normal.0447fe9.png',
+            blindfold: 'http://cdn.shoes.cn/blindfold.58ce423.png',
+            greeting: 'http://cdn.shoes.cn/greeting.1415c1c.png'
         },
-        bear: 'http://cdn.tycoding.cn/normal.0447fe9.png',
+        bear: 'http://cdn.shoes.cn/normal.0447fe9.png',
         gifCode: api.gifCode,
     },
     created() {

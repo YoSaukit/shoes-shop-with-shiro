@@ -62,7 +62,7 @@ redis:
 #mybatis配置
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: cn.tycoding.system.entity
+  type-aliases-package: cn.shoes.system.entity
   configuration:
     # 使用jdbc的getGeneratedKeys 可以获取数据库自增主键值
     use-generated-keys: true
@@ -91,6 +91,6 @@ qiniu:
   bucket_name: BUCKETNAME
   url: http://xxx/
 mapper:
-  mappers: cn.tycoding.common.config.MyMapper
+  mappers: cn.shoes.common.config.MyMapper
   not-empty: false
   identity: MYSQL
