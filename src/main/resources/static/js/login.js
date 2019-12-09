@@ -2,7 +2,7 @@ let app = new Vue({
     el: '#app',
     data: {
         form: {
-            username: 'shoes',
+            username: 'admin',
             password: '123456',
             remember: false,
             code: '',
